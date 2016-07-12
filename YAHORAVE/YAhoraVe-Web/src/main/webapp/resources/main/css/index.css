@@ -70,24 +70,20 @@
 
 .mu-slider-small-title {
   font-family: "Tangerine", cursive;
-  font-size: 100px;
-  font-weight: 400;
-  line-height: 40px;
+  font-size: 70px;
+  line-height: 30px;
   text-align: center;
 }
 
 .mu-slider-title {
   color: #fff;
   font-size: 70px;
-  line-height: 90px;
+  line-height: 30px;
   text-align: center;
 }
 
 p {
   color: #fff;
   font-size: 20px;
-  margin-bottom: 30px;
-  margin-top: 10px;
-  padding: 0 30px;
   text-align: center;
 }

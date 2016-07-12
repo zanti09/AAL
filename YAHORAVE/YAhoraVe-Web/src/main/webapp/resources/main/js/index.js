@@ -73,7 +73,7 @@ $(document).ready(function () {
 
     function startTimer() {
         // wait 2 seconds before calling goInactive
-        timeoutID = window.setInterval(goToNextItem, 3000);
+        timeoutID = window.setInterval(goToNextItem, 4000);
     }
     startTimer();
 
