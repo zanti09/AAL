@@ -20,6 +20,7 @@ $(document).ready(function () {
 
     function setClickedItem(e) {
         removeActiveLinks();
+        resetTimer();
 
         var clickedLink = e.target;
         activeLink = clickedLink.itemID;
@@ -63,5 +64,34 @@ $(document).ready(function () {
             }
         }
         return null;
+    }
+
+    //
+// The code for sliding the content automatically
+//
+    var timeoutID;
+
+    function startTimer() {
+        // wait 2 seconds before calling goInactive
+        timeoutID = window.setInterval(goToNextItem, 3000);
+    }
+    startTimer();
+
+    function resetTimer() {
+        window.clearInterval(timeoutID);
+        startTimer();
+    }
+
+    function goToNextItem() {
+        removeActiveLinks();
+
+        if (activeLink < links.length - 1) {
+            activeLink++;
+        } else {
+            activeLink = 0;
+        }
+
+        var newLink = links[activeLink];
+        changePosition(newLink);
     }
 });
