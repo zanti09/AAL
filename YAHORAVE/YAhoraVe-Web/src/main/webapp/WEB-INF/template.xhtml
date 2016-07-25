@@ -1,184 +1,165 @@
-<!DOCTYPE html [
-    <!ENTITY nbsp "&#160;">
-    <!ENTITY bull "&#8226;">
-    <!ENTITY copy "&#169;">
-]>
-<html xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:p="http://primefaces.org/ui">
+<!DOCTYPE html [ <!ENTITY nbsp "&#160;"> <!ENTITY bull "&#8226;"> <!ENTITY copy "&#169;"> ]>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+
 <h:head>
+
     <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/main/images/favicon.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/main/images/favicon.png"/>
     </f:facet>
 
     <title>Y Ahora Ve?</title>
-    <h:outputStylesheet name="main/css/showcase.css" />
-    <h:outputStylesheet name="main/css/perfect-scrollbar.css" />
-    <h:outputStylesheet name="main/css/sh.css" />
-    <h:outputScript name="jquery/jquery.js" library="primefaces" />
-    <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" />
-    <h:outputScript name="main/js/perfect-scrollbar.js" />
-    <h:outputScript name="main/js/showcase.js" />
-    
+    <h:outputStylesheet name="main/css/showcase.css"/>
+    <h:outputStylesheet name="main/css/perfect-scrollbar.css"/>
+    <h:outputStylesheet name="main/css/sh.css"/>
+    <h:outputScript name="jquery/jquery.js" library="primefaces"/>
+    <h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
+    <h:outputScript name="main/js/perfect-scrollbar.js"/>
+    <h:outputScript name="main/js/showcase.js"/>
 
-   
+
     <!-- Google Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'></link>        
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'></link>
-    <link href='https://fonts.googleapis.com/css?family=Prata' rel='stylesheet' type='text/css'></link>
-    <ui:insert name="head" />
+    <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Prata' rel='stylesheet' type='text/css'/>
+    <ui:insert name="head"/>
     <script type="text/javascript">
-		var _gaq = _gaq || [];
-  		_gaq.push(['_setAccount', 'UA-12200033-1']);
-  		_gaq.push(['_trackPageview']);
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12200033-1']);
+        _gaq.push(['_trackPageview']);
 
-  		(function() {
-   			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  		})();
-	</script>
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
 </h:head>
+
 
 <h:body>
 
     <!-- PC CONTENT STARTS HERE-->
     <div class="PC">
-        
-	<div id="MENUSIDE">
-    	<div id="MENUSIDEindent">
-            <span id="LOGO" class="bordersOfMenuSide">
-                <h:graphicImage name="main/images/logo.svg" />
-                <h:graphicImage id="BlueLogo" styleClass="hiddenLogo" name="main/images/logoBlue.svg" />
-            </span>
-            <div class="MenuSideMainLink bordersOfMenuSide"><h:graphicImage name="main/images/zoom.svg" class="zoomIcon"/><input id="menuSearch" type="text" placeholder="Search Menu" class="boldFont fontSize14 mustClose searchInput"/></div>
-            
-            <span id="SubMenu-Ajax" class="MenuSideMainLink bordersOfMenuSide" onclick="Showcase.openSubMenu(this);"><h:graphicImage name="main/images/mono/ajaxCore.svg" /><h:graphicImage styleClass="hiddenIcons" name="main/images/mono/ajaxCoreBlue.svg" /><span class="MainLinkText">Restaurantes</span></span>
-            <div class="SubMenuLinkContainer">
-            	<a class="SubMenuLink" href="#{request.contextPath}/ui/data/gmap/basic.xhtml">&bull; Basic</a>               
+
+        <div id="MENUSIDE">
+            <div id="MENUSIDEindent">
+                        <span id="LOGO" class="bordersOfMenuSide">
+                            <!--<h:graphicImage name="main/images/logo.svg" />-->
+                            <!--<h:graphicImage id="BlueLogo" styleClass="hiddenLogo" name="main/images/logoBlue.svg" />-->
+                        </span>
+                <div class="MenuSideMainLink bordersOfMenuSide"><h:graphicImage name="main/images/zoom.svg"
+                                                                                class="zoomIcon"/><input id="menuSearch"
+                                                                                                         type="text"
+                                                                                                         placeholder="Search Menu"
+                                                                                                         class="boldFont fontSize14 mustClose searchInput"/>
+                </div>
+
+                        <span id="SubMenu-Ajax" class="MenuSideMainLink bordersOfMenuSide"
+                              onclick="Showcase.openSubMenu(this);">
+                            <!--<h:graphicImage name="main/images/mono/ajaxCore.svg" />-->
+                            <!--<h:graphicImage styleClass="hiddenIcons" name="main/images/mono/ajaxCoreBlue.svg" />-->
+                            <span class="MainLinkText">Restaurantes</span>
+                        </span>
+
+                <div class="SubMenuLinkContainer">
+                    <a class="SubMenuLink" href="#{request.contextPath}/ui/data/gmap/basic.xhtml">&bull;Basic</a>
+                </div>
             </div>
         </div>
-    </div>
-        
-    <script type="text/javascript">
-        restoreMenuState();
-    </script>
-    
-    <div id="CONTENTSIDE">
-    	<div id="CONTENTSIDEindent">
-            
-        	<!-- header bar start-->
-			<div class="ContentSideSections" id="PFTopLinksCover" style="height:60px;">
-                <a id="LOGOTEXTSIDE" href="#{request.contextPath}/index.xhtml">
-                    <span class="dispBlock logoDarkText fontSize30">PrimeFaces</span>
-                    <span class="dispBlock logoBlueText fontSize28 regularFont">SHOWCASE</span>
-                </a>
-                
-                <a href="#{request.contextPath}/ui/misc/mockosx.xhtml" class="PFTopLinks floatRight boldFont marginRight20"><h:graphicImage name="main/images/pfMockosx.svg" /><span class="PFGrayText">PF</span><span class="PFDarkText">MockOSX</span></a>
-                <a href="http://www.primefaces.org/showcase-ext" class="PFTopLinks floatRight boldFont"><h:graphicImage name="main/images/pfExtensions.svg" /><span class="PFGrayText">PF</span><span class="PFDarkText">Extensions</span></a>
-                <span class="PFTopLinks floatRight boldFont cursorPointer" id="pushNav">
-                    <h:graphicImage name="main/images/pfPush.svg" /><span class="PFGrayText">PF</span><span class="PFDarkText">Push</span>
-                    <div id="PushDemos" class="navOverlay">
-                        <a href="#{request.contextPath}/push/counter.xhtml"><span class="ui-text">Counter</span></a>
-                        <a href="#{request.contextPath}/push/chat.xhtml"><span class="ui-text">Chat</span></a>
-                        <a href="#{request.contextPath}/push/notify.xhtml"><span class="ui-text">Notify</span></a>
-                        <a href="#{request.contextPath}/mobile/checkin.xhtml"><span class="ui-text">Checkin</span></a>
-                        <a href="#{request.contextPath}/push/viewparam.xhtml"><span class="ui-text">ViewParam</span></a>
-                        <a href="#{request.contextPath}/push/chart.xhtml"><span class="ui-text">Chart</span></a>
-                        <a href="#{request.contextPath}/push/photoShare.xhtml"><span class="ui-text">PhotoShare</span></a>
+
+        <script type="text/javascript">
+            restoreMenuState();
+        </script>
+
+        <div id="CONTENTSIDE">
+            <div id="CONTENTSIDEindent">
+
+                <!-- header bar start-->
+                <div class="ContentSideSections" id="PFTopLinksCover" style="height:60px;">
+                    <a id="LOGOTEXTSIDE" href="#{request.contextPath}/index.xhtml">
+                        <span class="dispBlock logoDarkText fontSize30"></span>
+                        <span class="dispBlock logoBlueText fontSize28 regularFont">Y AHORA VE ?</span>
+                    </a>
+
+                    <div class="mobileLogoCover">
+                        <h:graphicImage name="main/images/logoBlue.svg" style="height:40px;"
+                                        styleClass="floatLeft marginRight10"/>
+                        <span class="dispBlock logoDarkText fontSize16 floatLeft">PrimeFaces <span
+                                class="dispBlock logoBlueText fontSize18 boldFont">SHOWCASE</span></span>
                     </div>
-                </span>
-                <a href="#{request.contextPath}/mobile/index.xhtml" class="PFTopLinks floatRight boldFont"><h:graphicImage name="main/images/pfMobile.svg" /><span class="PFGrayText">PF</span><span class="PFDarkText">Mobile</span></a>
-                <span class="PFTopLinks floatRight boldFont cursorPointer" id="themeSwitcher">
-                    <h:form>
-                        <h:graphicImage name="main/images/themeswitcher.svg" /><span class="PFGrayText">PF</span><span class="PFDarkText">Themes</span>
-                        <div id="GlobalThemeSwitcher" class="navOverlay">
-                            <ui:repeat value="#{themeSwitcherView.themes}" var="theme">
-                                <a href="#" data-theme="#{theme.name}"><span class="ui-theme ui-theme-#{theme}"></span><span class="ui-text">#{theme.displayName}</span></a>
-                            </ui:repeat>
+                    <select id="mobilemenu" class="selectmenu regularFont">
+                        <option value="">Menu</option>
+                        <option value="#{request.contextPath}/index.xhtml" class="LEVEL1">Home</option>
+                        <optgroup label="Restaurantes" class="LEVEL1">
+                            <option value="#{request.contextPath}/ui/data/gmap/basic.xhtml">GMap - Basic</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <!-- header bar end-->
+
+                <ui:insert name="content">
+
+                    <ui:insert name="subsubmenu"></ui:insert>
+
+                    <div class="ContentSideSections">
+                        <div class="Content100 overHidden TextShadow">
+                            <span class="fontSize30 TextShadow orange regularFont marginBottom20 dispBlock"><ui:insert
+                                    name="title"/></span>
+                                    <span class="defaultText dispTable"><ui:insert name="description"/>
+                                    </span>
                         </div>
-                        <p:remoteCommand name="changeTheme" actionListener="#{guestPreferences.changeTheme}" />
-                    </h:form>
-                </span>
-                
-                <div class="mobileLogoCover">
-                    <h:graphicImage name="main/images/logoBlue.svg" style="height:40px;" styleClass="floatLeft marginRight10"/>
-                    <span class="dispBlock logoDarkText fontSize16 floatLeft">PrimeFaces <span class="dispBlock logoBlueText fontSize18 boldFont">SHOWCASE</span></span> 
-                </div>
-                <select id="mobilemenu" class="selectmenu regularFont">
-                    <option value="">Menu</option>
-                    <option value="#{request.contextPath}/index.xhtml" class="LEVEL1">Home</option>
-                    <optgroup label="Restaurantes" class="LEVEL1">
-                        <option value="#{request.contextPath}/ui/data/gmap/basic.xhtml">GMap - Basic</option>
-                    </optgroup>
-                </select>
-            </div>
-            <!-- header bar end-->
-
-            <ui:insert name="content">
-                
-                <ui:insert name="subsubmenu"></ui:insert>
-                
-                <div class="ContentSideSections">
-                    <div class="Content100 overHidden TextShadow">
-                        <span class="fontSize30 TextShadow orange regularFont marginBottom20 dispBlock"><ui:insert name="title" /></span>
-                        <span class="defaultText dispTable"><ui:insert name="description" />
-                        </span>
                     </div>
-                </div>
 
-                <div class="ContentSideSections Implementation">
-                    <ui:insert name="implementation" />
-                </div>
 
-                <div id="SourceContentSide" class="ContentSideSections Source">
-                    <div class="Content100 overHidden TextShadow">
-                        <span class="defaultText">
-                            <span class="fontSize18 logoBlueText">
-                                <ui:insert name="source" />
-                            </span>
-                        </span>
+                    <div class="ContentSideSections Implementation">
+                        <ui:insert name="implementation"/>
                     </div>
-                </div>
-           
-            </ui:insert>
-            
-            <!-- footer start-->
-            <div class="ContentSideSections">
-                <span class="floatLeft fontSize14 gray"><a href="http://www.primetek.com.tr">PrimeTek</a>, Copyright &copy; 2015<br />All rights reserved.</span>
-                <span class="floatRight fontSize14 gray">Running #{build.primefacesVersion} on #{build.jsfVersion}.</span>
-                <div style="clear:both" />
+
+                    <div id="SourceContentSide" class="ContentSideSections Source">
+                        <div class="Content100 overHidden TextShadow">
+                                    <span class="defaultText">
+                                        <span class="fontSize18 logoBlueText">
+                                            <ui:insert name="source"/>
+                                        </span>
+                                    </span>
+                        </div>
+                    </div>
+
+                </ui:insert>
+
             </div>
-            <!-- footer end-->
-            
         </div>
-    </div>
-    
+
     </div>
     <!-- PC CONTENT END-->
-    
-     <ui:insert name="status">
+
+    <ui:insert name="status">
         <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">
             <f:facet name="start">
-                <p:graphicImage name="main/images/loader.gif" />
+                <p:graphicImage name="main/images/loader.gif"/>
             </f:facet>
 
             <f:facet name="complete">
-                <h:outputText value="" />
+                <h:outputText value=""/>
             </f:facet>
         </p:ajaxStatus>
     </ui:insert>
-    
+
     <ui:insert name="highlight">
         <h:outputScript name="main/js/sh.js" target="body"/>
     </ui:insert>
-    
+
     <ui:insert name="body"></ui:insert>
 </h:body>
 </html>
