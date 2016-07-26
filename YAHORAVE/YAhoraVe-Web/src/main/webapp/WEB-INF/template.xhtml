@@ -2,19 +2,18 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
-
-
 <h:head>
 
     <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/main/images/favicon.png"/>
     </f:facet>
 
     <title>Y Ahora Ve?</title>
+
     <h:outputStylesheet name="main/css/showcase.css"/>
     <h:outputStylesheet name="main/css/perfect-scrollbar.css"/>
     <h:outputStylesheet name="main/css/sh.css"/>
@@ -54,27 +53,124 @@
 
         <div id="MENUSIDE">
             <div id="MENUSIDEindent">
-                        <span id="LOGO" class="bordersOfMenuSide">
-                            <!--<h:graphicImage name="main/images/logo.svg" />-->
-                            <!--<h:graphicImage id="BlueLogo" styleClass="hiddenLogo" name="main/images/logoBlue.svg" />-->
-                        </span>
-                <div class="MenuSideMainLink bordersOfMenuSide"><h:graphicImage name="main/images/zoom.svg"
-                                                                                class="zoomIcon"/><input id="menuSearch"
-                                                                                                         type="text"
-                                                                                                         placeholder="Search Menu"
-                                                                                                         class="boldFont fontSize14 mustClose searchInput"/>
+
+                <span id="LOGO" class="bordersOfMenuSide">
+                    <h:graphicImage name="main/images/logoYahoraVe.png"/>
+                    <h:graphicImage id="BlueLogo" styleClass="hiddenLogo" name="main/images/logoYahoraVe.png"/>
+                </span>
+
+                <div class="MenuSideMainLink bordersOfMenuSide"><h:graphicImage name="main/images/zoom.svg" class="zoomIcon"/>
+                    <input id="menuSearch" type="text" placeholder="Search Menu" class="boldFont fontSize14 mustClose searchInput"/>
                 </div>
 
-                        <span id="SubMenu-Ajax" class="MenuSideMainLink bordersOfMenuSide"
-                              onclick="Showcase.openSubMenu(this);">
-                            <!--<h:graphicImage name="main/images/mono/ajaxCore.svg" />-->
-                            <!--<h:graphicImage styleClass="hiddenIcons" name="main/images/mono/ajaxCoreBlue.svg" />-->
-                            <span class="MainLinkText">Restaurantes</span>
-                        </span>
 
-                <div class="SubMenuLinkContainer">
-                    <a class="SubMenuLink" href="#{request.contextPath}/ui/data/gmap/basic.xhtml">&bull;Basic</a>
-                </div>
+                <!--
+                *************************
+                MENU Y SUBMENU LATERAL
+                *************************
+                -->
+
+                <h:form>
+
+                    <!--
+                    *****************
+                    PRESUPUESTO
+                    *****************
+                    -->
+                    <span id="SubMenu-Ajax1" class="MenuSideMainLink bordersOfMenuSide"
+                          onclick="Showcase.openSubMenu(this);">
+                        <span class="MainLinkText">Presupuesto</span>
+                    </span>
+
+                    <div class="SubMenuLinkContainer">
+                        <p:outputLabel for="Presupuesto" value="Presupuesto en dólares: "/>
+                        <h:inputText id="Presupuesto" class="PresupuestoInput">Ingrese su puesupuesto</h:inputText>
+                    </div>
+
+                    <!--
+                    *****************
+                    SALIDA DE LA POLI
+                    *****************
+                    -->
+                    <span id="SubMenu-Ajax2" class="MenuSideMainLink bordersOfMenuSide"
+                          onclick="Showcase.openSubMenu(this);">
+                        <span class="MainLinkText">Salidas de la Poli</span>
+                    </span>
+
+                    <div class="SubMenuLinkContainer">
+                        <p:outputLabel for="salidas" value="Salidas:"/>
+                        <p:selectOneListbox id="salidas" value="">
+                            <f:selectItem itemLabel="Salida del CEC a la Toledo" itemValue="toledo"/>
+                            <f:selectItem itemLabel="Salida por Ing. Eléctrica" itemValue="electrica"/>
+                            <f:selectItem itemLabel="Salida por Ing. Civil" itemValue="civil"/>
+                            <f:selectItem itemLabel="Salida por Av. Mena Caamaño" itemValue="mcaamaño"/>
+                            <f:selectItem itemLabel="Salida por Teatro Politécnico" itemValue="teatro"/>
+                        </p:selectOneListbox>
+                    </div>
+
+
+                    <!--
+                    *************************
+                    TIPOS DE ESTABLECIMIENTOS
+                    *************************
+                    -->
+                    <span id="SubMenu-Ajax3" class="MenuSideMainLink bordersOfMenuSide"
+                          onclick="Showcase.openSubMenu(this);">
+                        <span class="MainLinkText">Tipos de Establecimiento</span>
+                    </span>
+
+                    <div class="SubMenuLinkContainer">
+                        <p:outputLabel for="tipoEstablecimiento" value=""/>
+                        <p:selectOneListbox id="tipoEstablecimiento" value="">
+                            <f:selectItem itemLabel="Puestos" itemValue="1"/>
+                            <f:selectItem itemLabel="Huecas" itemValue="2"/>
+                            <f:selectItem itemLabel="Restaurantes" itemValue="3"/>
+                        </p:selectOneListbox>
+                    </div>
+
+                    <!--
+                    ******************
+                    ESTABLEC. CERCANOS
+                    ******************
+                    -->
+                    <span id="SubMenu-Ajax4" class="MenuSideMainLink bordersOfMenuSide"
+                          onclick="Showcase.openSubMenu(this);">
+                        <span class="MainLinkText">Establecimientos cercanos</span>
+                    </span>
+
+                    <div class="SubMenuLinkContainer">
+                        <a class="SubMenuLink" href="#{request.contextPath}/ui/data/gmap/mapa.xhtml">&bull;Escoge tus establecimientos cercanos</a>
+                    </div>
+
+
+                    <!--
+                    *************************
+                    TIEMPO DE PREPARACIÓN
+                    *************************
+                    -->
+                    <span id="SubMenu-Ajax5" class="MenuSideMainLink bordersOfMenuSide"
+                          onclick="Showcase.openSubMenu(this);">
+                        <span class="MainLinkText">Tiempo de preparación</span>
+                    </span>
+
+                    <div class="SubMenuLinkContainer">
+                        <p:outputLabel for="tiempoPreparacion" value="Tiempo de preparación en minutos"/>
+                        <h:inputText id="tiempoPreparacion" class="PresupuestoInput"></h:inputText>
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+
+                    <p:commandButton value="Filtrar !" id="Filtrar" class="btnFiltrar" ajax="false" />
+
+
+
+
+
+                </h:form>
+
             </div>
         </div>
 
@@ -87,9 +183,9 @@
 
                 <!-- header bar start-->
                 <div class="ContentSideSections" id="PFTopLinksCover" style="height:60px;">
-                    <a id="LOGOTEXTSIDE" href="#{request.contextPath}/index.xhtml">
-                        <span class="dispBlock logoDarkText fontSize30"></span>
-                        <span class="dispBlock logoBlueText fontSize28 regularFont">Y AHORA VE ?</span>
+                    <a href="#{request.contextPath}/index.xhtml">
+                        <span class="dispBlock logoDarkText fontSize30">¿ Y AHORA VE ?</span>
+                        <span class="dispBlock logoBlueText fontSize28 regularFont">Busca tus huecas favoritas !!</span>
                     </a>
 
                     <div class="mobileLogoCover">
@@ -98,6 +194,12 @@
                         <span class="dispBlock logoDarkText fontSize16 floatLeft">PrimeFaces <span
                                 class="dispBlock logoBlueText fontSize18 boldFont">SHOWCASE</span></span>
                     </div>
+
+                    <!--
+                    *************************
+                    MENU Y SUBMENU RESPONSIVO
+                    *************************
+                    -->
                     <select id="mobilemenu" class="selectmenu regularFont">
                         <option value="">Menu</option>
                         <option value="#{request.contextPath}/index.xhtml" class="LEVEL1">Home</option>
@@ -128,11 +230,11 @@
 
                     <div id="SourceContentSide" class="ContentSideSections Source">
                         <div class="Content100 overHidden TextShadow">
-                                    <span class="defaultText">
-                                        <span class="fontSize18 logoBlueText">
-                                            <ui:insert name="source"/>
-                                        </span>
-                                    </span>
+                            <span class="defaultText">
+                                <span class="fontSize18 logoBlueText">
+                                    <ui:insert name="source"/>
+                                </span>
+                            </span>
                         </div>
                     </div>
 
