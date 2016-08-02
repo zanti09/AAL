@@ -1,0 +1,138 @@
+CREATE TABLE COMENTARIO (
+	idComentario serial NOT NULL,
+	descComentario varchar(200) NOT NULL,
+	idUsuario int NOT NULL,
+	idMenu int NOT NULL,
+	CONSTRAINT COMENTARIO_pk PRIMARY KEY (idComentario)
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE USUARIO (
+	idUsuario serial NOT NULL,
+	nombreUsuario varchar(5) NOT NULL,
+	nickUsuario varchar(50),
+	passwordUsuario varchar(50) NOT NULL,
+	CONSTRAINT USUARIO_pk PRIMARY KEY (idUsuario)
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE PRODUCTO (
+	idProducto serial NOT NULL,
+	nombreProducto varchar(100) NOT NULL,
+	ingredientesProducto varchar(100) NOT NULL,
+	precioProducto DECIMAL NOT NULL,
+	CONSTRAINT PRODUCTO_pk PRIMARY KEY (idProducto)
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE MENU (
+	idMenu serial NOT NULL,
+	descMenu varchar(100),
+	idProducto int NOT NULL,
+	idEstablecimiento int NOT NULL,
+	CONSTRAINT MENU_pk PRIMARY KEY (idMenu)
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE RANKING_MENU (
+	idRankingMenu serial NOT NULL,
+	idUsuario int NOT NULL,
+	idMenu int NOT NULL,
+	idRanking int NOT NULL,
+	CONSTRAINT RANKING_MENU_pk PRIMARY KEY (idRankingMenu)
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE RANKING (
+	idRanking serial NOT NULL,
+	valRanking DECIMAL NOT NULL,
+	CONSTRAINT RANKING_pk PRIMARY KEY (idRanking)
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE ESTABLECIMIENTO (
+	idEstablecimiento serial NOT NULL,
+	nombreEstablecimiento varchar(200) NOT NULL,
+	ubicacionEstablecimiento varchar(200) NOT NULL,
+	descEstablecimiento varchar(200) NOT NULL,
+	latitud DECIMAL NOT NULL,
+	longitud DECIMAL NOT NULL,
+	idUsuario int NOT NULL,
+	idTipoEstablecimiento int NOT NULL,
+	CONSTRAINT ESTABLECIMIENTO_pk PRIMARY KEY (idEstablecimiento)
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE TIPO_ESTABLECIMIENTO (
+	idTipoEstablecimiento serial NOT NULL,
+	tipoEstablecimiento varchar(30) NOT NULL,
+	CONSTRAINT TIPO_ESTABLECIMIENTO_pk PRIMARY KEY (idTipoEstablecimiento)
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE PERFIL_USUARIO (
+	idPerfilUsuario serial NOT NULL,
+	idUsuario int NOT NULL,
+	idPerfil int NOT NULL,
+	CONSTRAINT PERFIL_USUARIO_pk PRIMARY KEY (idPerfilUsuario)
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE PERFIL (
+	idPerfil serial NOT NULL,
+	nombrePerfil varchar(50) NOT NULL,
+	CONSTRAINT PERFIL_pk PRIMARY KEY (idPerfil)
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+ALTER TABLE COMENTARIO ADD CONSTRAINT COMENTARIO_fk0 FOREIGN KEY (idUsuario) REFERENCES USUARIO(idUsuario);
+ALTER TABLE COMENTARIO ADD CONSTRAINT COMENTARIO_fk1 FOREIGN KEY (idMenu) REFERENCES MENU(idMenu);
+
+
+
+ALTER TABLE MENU ADD CONSTRAINT MENU_fk0 FOREIGN KEY (idProducto) REFERENCES PRODUCTO(idProducto);
+ALTER TABLE MENU ADD CONSTRAINT MENU_fk1 FOREIGN KEY (idEstablecimiento) REFERENCES ESTABLECIMIENTO(idEstablecimiento);
+
+ALTER TABLE RANKING_MENU ADD CONSTRAINT RANKING_MENU_fk0 FOREIGN KEY (idUsuario) REFERENCES USUARIO(idUsuario);
+ALTER TABLE RANKING_MENU ADD CONSTRAINT RANKING_MENU_fk1 FOREIGN KEY (idMenu) REFERENCES MENU(idMenu);
+ALTER TABLE RANKING_MENU ADD CONSTRAINT RANKING_MENU_fk2 FOREIGN KEY (idRanking) REFERENCES RANKING(idRanking);
+
+
+ALTER TABLE ESTABLECIMIENTO ADD CONSTRAINT ESTABLECIMIENTO_fk0 FOREIGN KEY (idUsuario) REFERENCES USUARIO(idUsuario);
+ALTER TABLE ESTABLECIMIENTO ADD CONSTRAINT ESTABLECIMIENTO_fk1 FOREIGN KEY (idTipoEstablecimiento) REFERENCES TIPO_ESTABLECIMIENTO(idTipoEstablecimiento);
+
+
+ALTER TABLE PERFIL_USUARIO ADD CONSTRAINT PERFIL_USUARIO_fk0 FOREIGN KEY (idUsuario) REFERENCES USUARIO(idUsuario);
+ALTER TABLE PERFIL_USUARIO ADD CONSTRAINT PERFIL_USUARIO_fk1 FOREIGN KEY (idPerfil) REFERENCES PERFIL(idPerfil);
+
+
