@@ -69,7 +69,6 @@
                 MENU Y SUBMENU LATERAL
                 *************************
                 -->
-
                 <h:form>
 
                     <!--
@@ -139,10 +138,8 @@
                     </span>
 
                     <div class="SubMenuLinkContainer">
-                        <a class="SubMenuLink" href="#{request.contextPath}/ui/data/gmap/mapa.xhtml">&bull;Escoge tus establecimientos cercanos</a>
+                        <a class="SubMenuLink" href="#{request.contextPath}/ui/data/gmap/basic.xhtml">&bull;Escoge tus establecimientos cercanos</a>
                     </div>
-
-
                     <!--
                     *************************
                     TIEMPO DE PREPARACIÓN
@@ -152,23 +149,13 @@
                           onclick="Showcase.openSubMenu(this);">
                         <span class="MainLinkText">Tiempo de preparación</span>
                     </span>
-
                     <div class="SubMenuLinkContainer">
                         <p:outputLabel for="tiempoPreparacion" value="Tiempo de preparación en minutos"/>
                         <h:inputText id="tiempoPreparacion" class="PresupuestoInput"></h:inputText>
                     </div>
-
-                    <br/>
-                    <br/>
-                    <br/>
-
-
-                    <p:commandButton value="Filtrar !" id="Filtrar" class="btnFiltrar" ajax="false" />
-
-
-
-
-
+                    <div class="MenuControl">
+                        <p:commandButton value="Filtrar" id="Filtrar" class="btnFiltrar" ajax="false" />
+                    </div>                    
                 </h:form>
 
             </div>

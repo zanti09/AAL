@@ -135,7 +135,7 @@ body {
 .MainLinkText {
     color: #9ba5ac;
     font-size: 20px;
-    margin: 2px 0px 0px 60px;
+    margin: 2px 0px 0px 10px;
     display: block;
 }
 
@@ -160,16 +160,13 @@ body {
 }
 
 .PresupuestoInput{
-
     width: 90%;
     display: inline-block;
     float: left;
-    padding: 10px 0;
     cursor: pointer;
     border-radius: 4px;
     -webkit-border-radius: 4px;
     color: #1B1B1B;
-    font-size: 14px;
 }
 
 .SubMenuLink:hover {
@@ -177,14 +174,13 @@ body {
     color: #8dc5d9;
 }
 
+.MenuControl{
+    width: 100%;
+    text-align: center;
+}
 
 .btnFiltrar{
-    height:40px;
-    width:100px;
-    margin: -20px -50px;
-    position:relative;
-    top:50%;
-    left:50%;
+    margin-top: 50px;
 }
 
 .selectmenu {
