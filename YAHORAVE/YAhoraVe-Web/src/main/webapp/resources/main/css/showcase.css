@@ -1251,3 +1251,53 @@ input.searchInput {
     width: 30px;
     height: 27px;
 }
+#homeLink{
+    
+}
+
+#menuContenido{
+    margin: 0px;
+    float: right;
+    display: inline;
+    padding: 0px;
+}
+
+    #menuContenido > li{
+        float: left;
+    }
+
+    #menuContenido li{
+        list-style: none;
+    }
+
+        #menuContenido li a{
+            background-color: black;
+            color:white;
+            padding: 10px 15px;
+            display: block;
+        }
+
+        #menuContenido li a:hover{
+            background-color: rgb(100,100,100);
+            color:white;
+            padding: 10px 15px;
+            display: block;
+        }
+
+        #menuContenido li ul{
+            display:none;
+            margin:0px;
+            padding: 0px;
+            position:absolute;
+            transition: display 4s ;
+        }
+        
+        #menuContenido li span{
+            background-color: black;
+            color:white;
+            padding: 5px 15px;
+        }
+
+        #menuContenido li:hover > ul{
+            display: block;
+        }

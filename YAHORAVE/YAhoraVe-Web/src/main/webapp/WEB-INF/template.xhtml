@@ -167,20 +167,22 @@
 
         <div id="CONTENTSIDE">
             <div id="CONTENTSIDEindent">
-
                 <!-- header bar start-->
-                <div class="ContentSideSections" id="PFTopLinksCover" style="height:60px;">
-                    <a href="#{request.contextPath}/index.xhtml">
-                        <span class="dispBlock logoDarkText fontSize30">¿ Y AHORA VE ?</span>
-                        <span class="dispBlock logoBlueText fontSize28 regularFont">Busca tus huecas favoritas !!</span>
-                    </a>
-
-                    <div class="mobileLogoCover">
-                        <h:graphicImage name="main/images/logoBlue.svg" style="height:40px;"
-                                        styleClass="floatLeft marginRight10"/>
-                        <span class="dispBlock logoDarkText fontSize16 floatLeft">PrimeFaces <span
-                                class="dispBlock logoBlueText fontSize18 boldFont">SHOWCASE</span></span>
-                    </div>
+                <div class="ContentSideSections" id="PFTopLinksCover" style="height:30px;">
+                    <a id="homeLink" href="#{request.contextPath}/index.xhtml">¿ Y AHORA VE ?</a>
+                    <ul id="menuContenido">
+                        <li class="menuPrincipal" >
+                            <span>Administración</span>
+                            <ul class="subMenuContenido">
+                                <li class="subMenu">
+                                    <a href="#{request.contextPath}/ui/administracion/usuario.xhtml">Usuario</a>
+                                </li>
+                                <li class="subMenu">
+                                    <a href="#{request.contextPath}/ui/administracion/establecimiento.xhtml">Establecimientos</a>
+                                </li>
+                            </ul>
+                        </li>                      
+                    </ul>
 
                     <!--
                     *************************
