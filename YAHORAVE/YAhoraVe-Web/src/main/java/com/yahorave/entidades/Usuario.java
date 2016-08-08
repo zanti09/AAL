@@ -46,25 +46,21 @@ public class Usuario implements Serializable {
     private Integer idusuario;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 5)
+    @Size(min = 1, max = 70)
     @Column(name = "nombreusuario")
     private String nombreusuario;
-    @Size(max = 50)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "nickusuario")
     private String nickusuario;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 500)
     @Column(name = "passwordusuario")
     private String passwordusuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
     private List<Establecimiento> establecimientoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
-    private List<Comentario> comentarioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
-    private List<PerfilUsuario> perfilUsuarioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
-    private List<RankingMenu> rankingMenuList;
 
     public Usuario() {
     }
@@ -73,9 +69,10 @@ public class Usuario implements Serializable {
         this.idusuario = idusuario;
     }
 
-    public Usuario(Integer idusuario, String nombreusuario, String passwordusuario) {
+    public Usuario(Integer idusuario, String nombreusuario, String nickusuario, String passwordusuario) {
         this.idusuario = idusuario;
         this.nombreusuario = nombreusuario;
+        this.nickusuario = nickusuario;
         this.passwordusuario = passwordusuario;
     }
 
@@ -118,33 +115,6 @@ public class Usuario implements Serializable {
 
     public void setEstablecimientoList(List<Establecimiento> establecimientoList) {
         this.establecimientoList = establecimientoList;
-    }
-
-    @XmlTransient
-    public List<Comentario> getComentarioList() {
-        return comentarioList;
-    }
-
-    public void setComentarioList(List<Comentario> comentarioList) {
-        this.comentarioList = comentarioList;
-    }
-
-    @XmlTransient
-    public List<PerfilUsuario> getPerfilUsuarioList() {
-        return perfilUsuarioList;
-    }
-
-    public void setPerfilUsuarioList(List<PerfilUsuario> perfilUsuarioList) {
-        this.perfilUsuarioList = perfilUsuarioList;
-    }
-
-    @XmlTransient
-    public List<RankingMenu> getRankingMenuList() {
-        return rankingMenuList;
-    }
-
-    public void setRankingMenuList(List<RankingMenu> rankingMenuList) {
-        this.rankingMenuList = rankingMenuList;
     }
 
     @Override

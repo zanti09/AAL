@@ -12,9 +12,9 @@ CREATE TABLE COMENTARIO (
 
 CREATE TABLE USUARIO (
 	idUsuario serial NOT NULL,
-	nombreUsuario varchar(5) NOT NULL,
-	nickUsuario varchar(50),
-	passwordUsuario varchar(50) NOT NULL,
+	nombreUsuario varchar(70) NOT NULL,
+	nickUsuario varchar(50) NOT NULL,
+	passwordUsuario varchar(500) NOT NULL,
 	CONSTRAINT USUARIO_pk PRIMARY KEY (idUsuario)
 ) WITH (
   OIDS=FALSE
@@ -39,6 +39,7 @@ CREATE TABLE MENU (
 	descMenu varchar(100),
 	idProducto int NOT NULL,
 	idEstablecimiento int NOT NULL,
+	tiempoPreparacion DECIMAL NULL,
 	CONSTRAINT MENU_pk PRIMARY KEY (idMenu)
 ) WITH (
   OIDS=FALSE
@@ -73,10 +74,11 @@ CREATE TABLE ESTABLECIMIENTO (
 	nombreEstablecimiento varchar(200) NOT NULL,
 	ubicacionEstablecimiento varchar(200) NOT NULL,
 	descEstablecimiento varchar(200) NOT NULL,
-	latitud DECIMAL NOT NULL,
-	longitud DECIMAL NOT NULL,
+	latitud NUMERIC(15,10) NOT NULL,
+	longitud NUMERIC(15,10) NOT NULL,
 	idUsuario int NOT NULL,
 	idTipoEstablecimiento int NOT NULL,
+	categoria varchar(50) NULL,
 	CONSTRAINT ESTABLECIMIENTO_pk PRIMARY KEY (idEstablecimiento)
 ) WITH (
   OIDS=FALSE

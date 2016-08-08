@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="head">
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    </ui:define>
+
+    <h:form id="createForm">
+        <p:dialog id="mdlRegistrar" header="Crear Usuario" widgetVar="dlgRegistrar" modal="true" showEffect="fade" hideEffect="fade" height="600" width="600" class="transparentDlg" >
+            <p:panel id="pnlDatos" header="Información del Establecimiento" style="margin-bottom:10px;width: 100%;" >
+                <p:messages id="msgRegistrar" />
+                <h:panelGrid id="pngDatos" columns="3" cellpadding="5">
+                    <p:outputLabel for="nombre" value="Nombre:" />
+                    <p:inputText id="nombre" value="#{establecimientoVista.establecimiento.nombreestablecimiento}" required="true" label="Nombre">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="nombre" />
+
+                    <p:outputLabel for="salidaPoli" value="Salida de la Poli:" />
+                    <p:inputText id="salidaPoli" value="#{establecimientoVista.establecimiento.ubicacionestablecimiento}" required="true" label="Salilda de la Poli">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="salidaPoli" />
+
+                    <p:outputLabel for="descripcion" value="Descripción:" />
+                    <p:inputText id="descripcion" value="#{establecimientoVista.establecimiento.descestablecimiento}" required="true" label="Salilda de la Poli">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="descripcion" />
+
+                    <p:outputLabel for="console" value="Tipo:" />
+                    <p:selectOneMenu id="console" value="#{establecimientoVista.tipoEstablecimiento.idtipoestablecimiento}" style="width:125px" required="true">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItems value="#{tipoEstablecimientosVista.tiposEstablecimientos}" var="tipoEstablecimiento" itemLabel="#{tipoEstablecimiento.tipoestablecimiento}" itemValue="#{tipoEstablecimiento.idtipoestablecimiento}" />
+                    </p:selectOneMenu>
+                    <p:message for="console" />
+                    
+                    <p:outputLabel for="usuarios" value="Dueño:" />
+                    <p:selectOneMenu id="usuarios" value="#{establecimientoVista.usuario.idusuario}" style="width:125px" required="true">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItems value="#{usuarioVista.usuarios}" var="usuario" itemLabel="#{usuario.nombreusuario}" itemValue="#{usuario.idusuario}" />
+                    </p:selectOneMenu>
+                    <p:message for="usuarios" />
+                </h:panelGrid>
+                <p:gmap center="-0.208947, -78.487823" zoom="15" type="ROADMAP" style="width:100%;height:400px" mapTypeControl="true" navigationControl="true"
+                        model="#{establecimientoVista.emptyModel}" onPointClick="handlePointClick(event);" widgetVar="map"/>
+                <p:commandButton value="Reubicar" onclick="return cancel()" />
+                <div align="center">
+                    <p:commandButton id="btnGuardad" update="pngDatos" value="Guardar" action="#{establecimientoVista.guardarEstablecimiento()}" icon="ui-icon-disk"/>
+                </div>
+            </p:panel>
+        </p:dialog>
+    </h:form>
+
+    <p:growl id="messages" showDetail="true" />
+    <p:dialog widgetVar="dlg" showEffect="fade" modal="true" closable="false">
+        <h:form prependId="false">
+            <h:panelGrid columns="2">
+
+                <f:facet name="footer">
+                    <p:commandButton value="Add" actionListener="#{establecimientoVista.addMarker}" update=":messages" oncomplete="markerAddComplete()" />
+                    <p:commandButton value="Cancel" onclick="return cancel()" />
+                </f:facet>
+            </h:panelGrid>
+
+            <h:inputHidden id="lat" value="#{establecimientoVista.lat}" />
+            <h:inputHidden id="lng" value="#{establecimientoVista.lng}" />
+        </h:form>
+    </p:dialog>
+
+    <script type="text/javascript">
+        var currentMarker = null;
+        var markerEmpty=true;
+
+        function handlePointClick(event) {
+            if (markerEmpty) {
+                if (currentMarker === null) {
+                    document.getElementById('lat').value = event.latLng.lat();
+                    document.getElementById('lng').value = event.latLng.lng();
+
+                    currentMarker = new google.maps.Marker({
+                        position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+                    });
+
+                    PF('map').addOverlay(currentMarker);
+
+                    PF('dlg').show();
+                }
+            }
+        }
+
+        function markerAddComplete() {
+            PF('dlg').hide();
+            markerEmpty=false;
+        }
+
+        function cancel() {
+            PF('dlg').hide();
+            currentMarker.setMap(null);
+            currentMarker = null;
+            markerEmpty=true;
+            return false;
+        }
+    </script>
+</ui:composition>

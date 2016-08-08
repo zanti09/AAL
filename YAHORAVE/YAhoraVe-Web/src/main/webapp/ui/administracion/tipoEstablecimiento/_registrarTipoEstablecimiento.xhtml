@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form id="frmRegistrar">
+        <p:dialog id="mdlRegistrar" header="Crear Usuario" widgetVar="dlgRegistrar" modal="true" showEffect="fade" hideEffect="fade" height="600" class="transparentDlg" >
+            <p:panel id="panel" header="Información del Establecimiento" style="margin-bottom:10px;">
+                <p:messages id="msgRegistrar" />
+                <h:panelGrid id="pngDatos" columns="3" cellpadding="5">
+                    <p:outputLabel for="nombre" value="Nombre:" />
+                    <p:inputText id="nombre" value="#{tipoEstablecimientosVista.tipoEstablecimiento.tipoestablecimiento}" required="true" label="Nombre">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="nombre" />
+                </h:panelGrid>
+
+                <div align="center">
+                    <p:commandButton id="btnGuardad" update="pngDatos" value="Guardar" action="#{tipoEstablecimientosVista.guardarTipoEstablecimiento()}" icon="ui-icon-disk"/>
+                </div>
+            </p:panel>
+        </p:dialog>
+    </h:form>
+</ui:composition>

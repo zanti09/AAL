@@ -6,10 +6,8 @@
 package com.yahorave.entidades;
 
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.util.List;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,12 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Establecimiento.findByUbicacionestablecimiento", query = "SELECT e FROM Establecimiento e WHERE e.ubicacionestablecimiento = :ubicacionestablecimiento"),
     @NamedQuery(name = "Establecimiento.findByDescestablecimiento", query = "SELECT e FROM Establecimiento e WHERE e.descestablecimiento = :descestablecimiento"),
     @NamedQuery(name = "Establecimiento.findByLatitud", query = "SELECT e FROM Establecimiento e WHERE e.latitud = :latitud"),
-    @NamedQuery(name = "Establecimiento.findByLongitud", query = "SELECT e FROM Establecimiento e WHERE e.longitud = :longitud")})
+    @NamedQuery(name = "Establecimiento.findByLongitud", query = "SELECT e FROM Establecimiento e WHERE e.longitud = :longitud"),
+    @NamedQuery(name = "Establecimiento.findByCategoria", query = "SELECT e FROM Establecimiento e WHERE e.categoria = :categoria")})
 public class Establecimiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,22 +61,24 @@ public class Establecimiento implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "descestablecimiento")
     private String descestablecimiento;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "latitud")
-    private BigInteger latitud;
+    private BigDecimal latitud;
     @Basic(optional = false)
     @NotNull
     @Column(name = "longitud")
-    private BigInteger longitud;
+    private BigDecimal longitud;
+    @Size(max = 50)
+    @Column(name = "categoria")
+    private String categoria;
     @JoinColumn(name = "idtipoestablecimiento", referencedColumnName = "idtipoestablecimiento")
     @ManyToOne(optional = false)
     private TipoEstablecimiento idtipoestablecimiento;
     @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
     private Usuario idusuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idestablecimiento")
-    private List<Menu> menuList;
 
     public Establecimiento() {
     }
@@ -88,7 +87,7 @@ public class Establecimiento implements Serializable {
         this.idestablecimiento = idestablecimiento;
     }
 
-    public Establecimiento(Integer idestablecimiento, String nombreestablecimiento, String ubicacionestablecimiento, String descestablecimiento, BigInteger latitud, BigInteger longitud) {
+    public Establecimiento(Integer idestablecimiento, String nombreestablecimiento, String ubicacionestablecimiento, String descestablecimiento, BigDecimal latitud, BigDecimal longitud) {
         this.idestablecimiento = idestablecimiento;
         this.nombreestablecimiento = nombreestablecimiento;
         this.ubicacionestablecimiento = ubicacionestablecimiento;
@@ -129,20 +128,28 @@ public class Establecimiento implements Serializable {
         this.descestablecimiento = descestablecimiento;
     }
 
-    public BigInteger getLatitud() {
+    public BigDecimal getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(BigInteger latitud) {
+    public void setLatitud(BigDecimal latitud) {
         this.latitud = latitud;
     }
 
-    public BigInteger getLongitud() {
+    public BigDecimal getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(BigInteger longitud) {
+    public void setLongitud(BigDecimal longitud) {
         this.longitud = longitud;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public TipoEstablecimiento getIdtipoestablecimiento() {
@@ -159,15 +166,6 @@ public class Establecimiento implements Serializable {
 
     public void setIdusuario(Usuario idusuario) {
         this.idusuario = idusuario;
-    }
-
-    @XmlTransient
-    public List<Menu> getMenuList() {
-        return menuList;
-    }
-
-    public void setMenuList(List<Menu> menuList) {
-        this.menuList = menuList;
     }
 
     @Override

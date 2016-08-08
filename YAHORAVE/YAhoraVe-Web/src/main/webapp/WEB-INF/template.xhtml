@@ -59,9 +59,9 @@
                     <h:graphicImage id="BlueLogo" styleClass="hiddenLogo" name="main/images/logoYahoraVe.png"/>
                 </span>
 
-                <div class="MenuSideMainLink bordersOfMenuSide"><h:graphicImage name="main/images/zoom.svg" class="zoomIcon"/>
+<!--                <div class="MenuSideMainLink bordersOfMenuSide"><h:graphicImage name="main/images/zoom.svg" class="zoomIcon"/>
                     <input id="menuSearch" type="text" placeholder="Search Menu" class="boldFont fontSize14 mustClose searchInput"/>
-                </div>
+                </div>-->
 
 
                 <!--
@@ -97,14 +97,14 @@
                     </span>
 
                     <div class="SubMenuLinkContainer">
-                        <p:outputLabel for="salidas" value="Salidas:"/>
+<!--                        <p:outputLabel for="salidas" value="Salidas:"/>
                         <p:selectOneListbox id="salidas" value="">
                             <f:selectItem itemLabel="Salida del CEC a la Toledo" itemValue="toledo"/>
                             <f:selectItem itemLabel="Salida por Ing. Eléctrica" itemValue="electrica"/>
                             <f:selectItem itemLabel="Salida por Ing. Civil" itemValue="civil"/>
                             <f:selectItem itemLabel="Salida por Av. Mena Caamaño" itemValue="mcaamaño"/>
                             <f:selectItem itemLabel="Salida por Teatro Politécnico" itemValue="teatro"/>
-                        </p:selectOneListbox>
+                        </p:selectOneListbox>-->
                     </div>
 
 
@@ -119,12 +119,12 @@
                     </span>
 
                     <div class="SubMenuLinkContainer">
-                        <p:outputLabel for="tipoEstablecimiento" value=""/>
+<!--                        <p:outputLabel for="tipoEstablecimiento" value=""/>
                         <p:selectOneListbox id="tipoEstablecimiento" value="">
                             <f:selectItem itemLabel="Puestos" itemValue="1"/>
                             <f:selectItem itemLabel="Huecas" itemValue="2"/>
                             <f:selectItem itemLabel="Restaurantes" itemValue="3"/>
-                        </p:selectOneListbox>
+                        </p:selectOneListbox>-->
                     </div>
 
                     <!--
@@ -175,28 +175,19 @@
                             <span>Administración</span>
                             <ul class="subMenuContenido">
                                 <li class="subMenu">
-                                    <a href="#{request.contextPath}/ui/administracion/usuario.xhtml">Usuario</a>
+                                    <a href="#{request.contextPath}/ui/administracion/usuario/usuario.xhtml">Usuario</a>
                                 </li>
                                 <li class="subMenu">
-                                    <a href="#{request.contextPath}/ui/administracion/establecimiento.xhtml">Establecimientos</a>
+                                    <a href="#{request.contextPath}/ui/administracion/establecimiento/establecimiento.xhtml">Establecimientos</a>
+                                </li>
+                                <li class="subMenu">
+                                    <a href="#{request.contextPath}/ui/administracion/tipoEstablecimiento/tipoEstablecimiento.xhtml">Tipos Establecimientos</a>
                                 </li>
                             </ul>
                         </li>                      
                     </ul>
-
-                    <!--
-                    *************************
-                    MENU Y SUBMENU RESPONSIVO
-                    *************************
-                    -->
-                    <select id="mobilemenu" class="selectmenu regularFont">
-                        <option value="">Menu</option>
-                        <option value="#{request.contextPath}/index.xhtml" class="LEVEL1">Home</option>
-                        <optgroup label="Restaurantes" class="LEVEL1">
-                            <option value="#{request.contextPath}/ui/data/gmap/basic.xhtml">GMap - Basic</option>
-                        </optgroup>
-                    </select>
                 </div>
+
                 <!-- header bar end-->
 
                 <ui:insert name="content">
