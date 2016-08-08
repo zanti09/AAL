@@ -1,29 +1,38 @@
-package com.yahorave.vista;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.yahorave.vista.establecimiento;
 
-import java.io.Serializable;
-import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import com.yahorave.entidades.Establecimiento;
-import com.yahorave.clientes.EstablecimientoCliente;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.yahorave.clientes.EstablecimientoCliente;
+import com.yahorave.entidades.Establecimiento;
 import com.yahorave.entidades.TipoEstablecimiento;
 import com.yahorave.entidades.Usuario;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
-import javax.faces.context.FacesContext;
-import javax.faces.application.FacesMessage;
 
-@ManagedBean(name = "establecimientoVista")
+/**
+ *
+ * @author santi
+ */
+@ManagedBean(name="establecimientosCercanosVista")
 @ViewScoped
-public class EstablecimientoVista implements Serializable {
-
+public class EstablecimientosCercanosVista implements Serializable {
     private List<Establecimiento> lstEstablecimiento;
     private Establecimiento establecimiento;
     private TipoEstablecimiento tipoEstablecimiento;
@@ -31,6 +40,8 @@ public class EstablecimientoVista implements Serializable {
     private GsonBuilder builder = new GsonBuilder();
     private Gson gson = builder.setDateFormat("yyyy-MM-dd").create();
 
+    private MapModel advancedModel; 
+    private Marker marker;
     private MapModel emptyModel;
     private String title;
     private double lat;
@@ -41,15 +52,27 @@ public class EstablecimientoVista implements Serializable {
 
     @PostConstruct
     public void init() {
-        establecimiento = new Establecimiento();
-        tipoEstablecimiento=new TipoEstablecimiento();
-        usuario=new Usuario();
-        emptyModel=new DefaultMapModel();
-        establecimiento.setIdtipoestablecimiento(new TipoEstablecimiento());
-        establecimiento.setIdusuario(new Usuario());
+        advancedModel = new DefaultMapModel();
+        
         String strListaEstablecimientos = establecimientoCliente.findAll(String.class);
         lstEstablecimiento = gson.fromJson(strListaEstablecimientos, new TypeToken<List<Establecimiento>>() {
         }.getType());
+        for(Establecimiento est:lstEstablecimiento){
+            LatLng coord = new LatLng(est.getLatitud().doubleValue(), est.getLongitud().doubleValue());
+            advancedModel.addOverlay(new Marker(coord, est.getNombreestablecimiento()));
+        }
+    }
+    
+    public MapModel getAdvancedModel() {
+        return advancedModel;
+    }
+      
+    public void onMarkerSelect(OverlaySelectEvent event) {
+        marker = (Marker) event.getOverlay();
+    }
+      
+    public Marker getMarker() {
+        return marker;
     }
 
     public List<Establecimiento> getEstablecimientos() {

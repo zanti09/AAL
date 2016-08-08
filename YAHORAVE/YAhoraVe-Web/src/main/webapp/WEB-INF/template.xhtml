@@ -1,247 +1,242 @@
 <!DOCTYPE html [ <!ENTITY nbsp "&#160;"> <!ENTITY bull "&#8226;"> <!ENTITY copy "&#169;"> ]>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
-<h:head>
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+        <h:head>
 
-    <f:facet name="first">
-        <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/main/images/favicon.png"/>
-    </f:facet>
+            <f:facet name="first">
+                <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+                <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+                <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+                <meta name="apple-mobile-web-app-capable" content="yes"/>
+                <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/main/images/favicon.png"/>
+            </f:facet>
 
-    <title>Y Ahora Ve?</title>
+            <title>Y Ahora Ve?</title>
 
-    <h:outputStylesheet name="main/css/showcase.css"/>
-    <h:outputStylesheet name="main/css/perfect-scrollbar.css"/>
-    <h:outputStylesheet name="main/css/sh.css"/>
-    <h:outputScript name="jquery/jquery.js" library="primefaces"/>
-    <h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
-    <h:outputScript name="main/js/perfect-scrollbar.js"/>
-    <h:outputScript name="main/js/showcase.js"/>
-
-
-    <!-- Google Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'/>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
-    <link href='https://fonts.googleapis.com/css?family=Prata' rel='stylesheet' type='text/css'/>
-    <ui:insert name="head"/>
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-12200033-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-
-</h:head>
+            <h:outputStylesheet name="main/css/showcase.css"/>
+            <h:outputStylesheet name="main/css/perfect-scrollbar.css"/>
+            <h:outputStylesheet name="main/css/sh.css"/>
+            <h:outputScript name="jquery/jquery.js" library="primefaces"/>
+            <h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
+            <h:outputScript name="main/js/perfect-scrollbar.js"/>
+            <h:outputScript name="main/js/showcase.js"/>
 
 
-<h:body>
+            <!-- Google Fonts -->
+            <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'/>
+            <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+            <link href='https://fonts.googleapis.com/css?family=Prata' rel='stylesheet' type='text/css'/>
+            <ui:insert name="head"/>
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-12200033-1']);
+                _gaq.push(['_trackPageview']);
 
-    <!-- PC CONTENT STARTS HERE-->
-    <div class="PC">
+                (function () {
+                    var ga = document.createElement('script');
+                    ga.type = 'text/javascript';
+                    ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
 
-        <div id="MENUSIDE">
-            <div id="MENUSIDEindent">
-
-                <span id="LOGO" class="bordersOfMenuSide">
-                    <h:graphicImage name="main/images/logoYahoraVe.jpg"/>
-                    <h:graphicImage id="BlueLogo" styleClass="hiddenLogo" name="main/images/logoYahoraVe.png"/>
-                </span>
-
-<!--                <div class="MenuSideMainLink bordersOfMenuSide"><h:graphicImage name="main/images/zoom.svg" class="zoomIcon"/>
-                    <input id="menuSearch" type="text" placeholder="Search Menu" class="boldFont fontSize14 mustClose searchInput"/>
-                </div>-->
+        </h:head>
 
 
-                <!--
-                *************************
-                MENU Y SUBMENU LATERAL
-                *************************
-                -->
-                <h:form>
+        <h:body>
 
-                    <!--
-                    *****************
-                    PRESUPUESTO
-                    *****************
-                    -->
-                    <span id="SubMenu-Ajax1" class="MenuSideMainLink bordersOfMenuSide"
-                          onclick="Showcase.openSubMenu(this);">
-                        <span class="MainLinkText">Presupuesto</span>
-                    </span>
+            <!-- PC CONTENT STARTS HERE-->
+            <div class="PC">
 
-                    <div class="SubMenuLinkContainer">
-                        <p:outputLabel for="Presupuesto" value="Presupuesto en dólares: "/>
-                        <h:inputText id="Presupuesto" class="PresupuestoInput">Ingrese su puesupuesto</h:inputText>
+                <div id="MENUSIDE">
+                    <div id="MENUSIDEindent">
+
+                        <span id="LOGO" class="bordersOfMenuSide">
+                            <!--<h:graphicImage name="main/images/logoYahoraVe.jpg"/>-->
+                        </span>
+
+                        <!--                <div class="MenuSideMainLink bordersOfMenuSide"><h:graphicImage name="main/images/zoom.svg" class="zoomIcon"/>
+                                            <input id="menuSearch" type="text" placeholder="Search Menu" class="boldFont fontSize14 mustClose searchInput"/>
+                                        </div>-->
+
+
+                        <!--
+                        *************************
+                        MENU Y SUBMENU LATERAL
+                        *************************
+                        -->
+                        <h:form>
+
+                            <!--
+                            *****************
+                            PRESUPUESTO
+                            *****************
+                            -->
+                            <span id="SubMenu-Ajax1" class="MenuSideMainLink bordersOfMenuSide"
+                                  onclick="Showcase.openSubMenu(this);">
+                                <span class="MainLinkText">Presupuesto</span>
+                            </span>
+
+                            <div class="SubMenuLinkContainer">
+                                <p:outputLabel for="Presupuesto" value="Presupuesto en dólares: "/>
+                                <h:inputText id="Presupuesto" class="PresupuestoInput">Ingrese su puesupuesto</h:inputText>
+                            </div>
+
+                            <!--
+                            *****************
+                            SALIDA DE LA POLI
+                            *****************
+                            -->
+                            <span id="SubMenu-Ajax2" class="MenuSideMainLink bordersOfMenuSide"
+                                  onclick="Showcase.openSubMenu(this);">
+                                <span class="MainLinkText">Salidas de la Poli</span>
+                            </span>
+
+                            <div class="SubMenuLinkContainer">
+                                <!--                        <p:outputLabel for="salidas" value="Salidas:"/>
+                                                        <p:selectOneListbox id="salidas" value="">
+                                                            <f:selectItem itemLabel="Salida del CEC a la Toledo" itemValue="toledo"/>
+                                                            <f:selectItem itemLabel="Salida por Ing. Eléctrica" itemValue="electrica"/>
+                                                            <f:selectItem itemLabel="Salida por Ing. Civil" itemValue="civil"/>
+                                                            <f:selectItem itemLabel="Salida por Av. Mena Caamaño" itemValue="mcaamaño"/>
+                                                            <f:selectItem itemLabel="Salida por Teatro Politécnico" itemValue="teatro"/>
+                                                        </p:selectOneListbox>-->
+                            </div>
+
+
+                            <!--
+                            *************************
+                            TIPOS DE ESTABLECIMIENTOS
+                            *************************
+                            -->
+                            <span id="SubMenu-Ajax3" class="MenuSideMainLink bordersOfMenuSide"
+                                  onclick="Showcase.openSubMenu(this);">
+                                <span class="MainLinkText">Tipos de Establecimiento</span>
+                            </span>
+
+                            <div class="SubMenuLinkContainer">
+                                <!--                        <p:outputLabel for="tipoEstablecimiento" value=""/>
+                                                        <p:selectOneListbox id="tipoEstablecimiento" value="">
+                                                            <f:selectItem itemLabel="Puestos" itemValue="1"/>
+                                                            <f:selectItem itemLabel="Huecas" itemValue="2"/>
+                                                            <f:selectItem itemLabel="Restaurantes" itemValue="3"/>
+                                                        </p:selectOneListbox>-->
+                            </div>
+
+                            <!--
+                            ******************
+                            ESTABLEC. CERCANOS
+                            ******************
+                            -->
+                            <span id="SubMenu-Ajax4" class="MenuSideMainLink bordersOfMenuSide"
+                                  onclick="Showcase.openSubMenu(this);">
+                                <span class="MainLinkText">Establecimientos cercanos</span>
+                            </span>
+
+                            <div class="SubMenuLinkContainer">
+                                <a class="SubMenuLink" href="#{request.contextPath}/ui/data/gmap/basic.xhtml">&bull;Escoge tus establecimientos cercanos</a>
+                            </div>
+                            <!--
+                            *************************
+                            TIEMPO DE PREPARACIÓN
+                            *************************
+                            -->
+                            <span id="SubMenu-Ajax5" class="MenuSideMainLink bordersOfMenuSide"
+                                  onclick="Showcase.openSubMenu(this);">
+                                <span class="MainLinkText">Tiempo de preparación</span>
+                            </span>
+                            <div class="SubMenuLinkContainer">
+                                <p:outputLabel for="tiempoPreparacion" value="Tiempo de preparación en minutos"/>
+                                <h:inputText id="tiempoPreparacion" class="PresupuestoInput"></h:inputText>
+                            </div>
+                            <div class="MenuControl">
+                                <p:commandButton value="Filtrar" id="Filtrar" class="btnFiltrar" ajax="false" />
+                            </div>                    
+                        </h:form>
+
                     </div>
-
-                    <!--
-                    *****************
-                    SALIDA DE LA POLI
-                    *****************
-                    -->
-                    <span id="SubMenu-Ajax2" class="MenuSideMainLink bordersOfMenuSide"
-                          onclick="Showcase.openSubMenu(this);">
-                        <span class="MainLinkText">Salidas de la Poli</span>
-                    </span>
-
-                    <div class="SubMenuLinkContainer">
-<!--                        <p:outputLabel for="salidas" value="Salidas:"/>
-                        <p:selectOneListbox id="salidas" value="">
-                            <f:selectItem itemLabel="Salida del CEC a la Toledo" itemValue="toledo"/>
-                            <f:selectItem itemLabel="Salida por Ing. Eléctrica" itemValue="electrica"/>
-                            <f:selectItem itemLabel="Salida por Ing. Civil" itemValue="civil"/>
-                            <f:selectItem itemLabel="Salida por Av. Mena Caamaño" itemValue="mcaamaño"/>
-                            <f:selectItem itemLabel="Salida por Teatro Politécnico" itemValue="teatro"/>
-                        </p:selectOneListbox>-->
-                    </div>
-
-
-                    <!--
-                    *************************
-                    TIPOS DE ESTABLECIMIENTOS
-                    *************************
-                    -->
-                    <span id="SubMenu-Ajax3" class="MenuSideMainLink bordersOfMenuSide"
-                          onclick="Showcase.openSubMenu(this);">
-                        <span class="MainLinkText">Tipos de Establecimiento</span>
-                    </span>
-
-                    <div class="SubMenuLinkContainer">
-<!--                        <p:outputLabel for="tipoEstablecimiento" value=""/>
-                        <p:selectOneListbox id="tipoEstablecimiento" value="">
-                            <f:selectItem itemLabel="Puestos" itemValue="1"/>
-                            <f:selectItem itemLabel="Huecas" itemValue="2"/>
-                            <f:selectItem itemLabel="Restaurantes" itemValue="3"/>
-                        </p:selectOneListbox>-->
-                    </div>
-
-                    <!--
-                    ******************
-                    ESTABLEC. CERCANOS
-                    ******************
-                    -->
-                    <span id="SubMenu-Ajax4" class="MenuSideMainLink bordersOfMenuSide"
-                          onclick="Showcase.openSubMenu(this);">
-                        <span class="MainLinkText">Establecimientos cercanos</span>
-                    </span>
-
-                    <div class="SubMenuLinkContainer">
-                        <a class="SubMenuLink" href="#{request.contextPath}/ui/data/gmap/basic.xhtml">&bull;Escoge tus establecimientos cercanos</a>
-                    </div>
-                    <!--
-                    *************************
-                    TIEMPO DE PREPARACIÓN
-                    *************************
-                    -->
-                    <span id="SubMenu-Ajax5" class="MenuSideMainLink bordersOfMenuSide"
-                          onclick="Showcase.openSubMenu(this);">
-                        <span class="MainLinkText">Tiempo de preparación</span>
-                    </span>
-                    <div class="SubMenuLinkContainer">
-                        <p:outputLabel for="tiempoPreparacion" value="Tiempo de preparación en minutos"/>
-                        <h:inputText id="tiempoPreparacion" class="PresupuestoInput"></h:inputText>
-                    </div>
-                    <div class="MenuControl">
-                        <p:commandButton value="Filtrar" id="Filtrar" class="btnFiltrar" ajax="false" />
-                    </div>                    
-                </h:form>
-
-            </div>
-        </div>
-
-        <script type="text/javascript">
-            restoreMenuState();
-        </script>
-
-        <div id="CONTENTSIDE">
-            <div id="CONTENTSIDEindent">
-                <!-- header bar start-->
-                <div class="ContentSideSections" id="PFTopLinksCover" style="height:30px;">
-                    <a id="homeLink" href="#{request.contextPath}/index.xhtml">¿ Y AHORA VE ?</a>
-                    <ul id="menuContenido">
-                        <li class="menuPrincipal" >
-                            <span>Administración</span>
-                            <ul class="subMenuContenido">
-                                <li class="subMenu">
-                                    <a href="#{request.contextPath}/ui/administracion/usuario/usuario.xhtml">Usuario</a>
-                                </li>
-                                <li class="subMenu">
-                                    <a href="#{request.contextPath}/ui/administracion/establecimiento/establecimiento.xhtml">Establecimientos</a>
-                                </li>
-                                <li class="subMenu">
-                                    <a href="#{request.contextPath}/ui/administracion/tipoEstablecimiento/tipoEstablecimiento.xhtml">Tipos Establecimientos</a>
-                                </li>
-                            </ul>
-                        </li>                      
-                    </ul>
                 </div>
 
-                <!-- header bar end-->
+                <script type="text/javascript">
+                    restoreMenuState();
+                </script>
 
-                <ui:insert name="content">
+                <div id="CONTENTSIDE">
+                    <div id="CONTENTSIDEindent">
+                        <!-- header bar start-->
+                        <div class="ContentSideSections" id="PFTopLinksCover" style="height:30px;">
+                            <a id="homeLink" href="#{request.contextPath}/index.xhtml">¿ Y AHORA VE ?</a>
+                            <ul id="menuContenido">
+                                <li class="menuPrincipal" >
+                                    <span>Administración</span>
+                                    <ul class="subMenuContenido">
+                                        <li class="subMenu">
+                                            <a href="#{request.contextPath}/ui/administracion/usuario/usuario.xhtml">Usuario</a>
+                                        </li>
+                                        <li class="subMenu">
+                                            <a href="#{request.contextPath}/ui/administracion/establecimiento/establecimiento.xhtml">Establecimientos</a>
+                                        </li>
+                                        <li class="subMenu">
+                                            <a href="#{request.contextPath}/ui/administracion/tipoEstablecimiento/tipoEstablecimiento.xhtml">Tipos Establecimientos</a>
+                                        </li>
+                                    </ul>
+                                </li>                      
+                            </ul>
+                        </div>
 
-                    <ui:insert name="subsubmenu"></ui:insert>
+                        <!-- header bar end-->
 
-                    <div class="ContentSideSections">
-                        <div class="Content100 overHidden TextShadow">
-                            <span class="fontSize30 TextShadow orange regularFont marginBottom20 dispBlock"><ui:insert
-                                    name="title"/></span>
-                                    <span class="defaultText dispTable"><ui:insert name="description"/>
+                        <ui:insert name="content">
+
+                            <ui:insert name="subsubmenu"></ui:insert>
+
+                            <div class="ContentSideSections Implementation">
+                                <span class="fontSize21 TextShadow blue regularFont dispBlock"><ui:insert name="title"/></span>
+                                <span class="defaultText dispTable"><ui:insert name="description"/></span>
+                            </div>
+
+
+                            <div class="ContentSideSections Implementation">
+                                <ui:insert name="implementation"/>
+                            </div>
+
+                            <div id="SourceContentSide" class="ContentSideSections Source">
+                                <div class="Content100 overHidden TextShadow">
+                                    <span class="defaultText">
+                                        <span class="fontSize18 logoBlueText">
+                                            <ui:insert name="source"/>
+                                        </span>
                                     </span>
-                        </div>
+                                </div>
+                            </div>
+
+                        </ui:insert>
+
                     </div>
-
-
-                    <div class="ContentSideSections Implementation">
-                        <ui:insert name="implementation"/>
-                    </div>
-
-                    <div id="SourceContentSide" class="ContentSideSections Source">
-                        <div class="Content100 overHidden TextShadow">
-                            <span class="defaultText">
-                                <span class="fontSize18 logoBlueText">
-                                    <ui:insert name="source"/>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-
-                </ui:insert>
+                </div>
 
             </div>
-        </div>
+            <!-- PC CONTENT END-->
 
-    </div>
-    <!-- PC CONTENT END-->
+            <ui:insert name="status">
+                <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">
+                    <f:facet name="start">
+                        <p:graphicImage name="main/images/loader.gif"/>
+                    </f:facet>
 
-    <ui:insert name="status">
-        <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">
-            <f:facet name="start">
-                <p:graphicImage name="main/images/loader.gif"/>
-            </f:facet>
+                    <f:facet name="complete">
+                        <h:outputText value=""/>
+                    </f:facet>
+                </p:ajaxStatus>
+            </ui:insert>
 
-            <f:facet name="complete">
-                <h:outputText value=""/>
-            </f:facet>
-        </p:ajaxStatus>
-    </ui:insert>
+            <ui:insert name="highlight">
+                <h:outputScript name="main/js/sh.js" target="body"/>
+            </ui:insert>
 
-    <ui:insert name="highlight">
-        <h:outputScript name="main/js/sh.js" target="body"/>
-    </ui:insert>
-
-    <ui:insert name="body"></ui:insert>
-</h:body>
-</html>
+            <ui:insert name="body"></ui:insert>
+        </h:body>
+    </html>

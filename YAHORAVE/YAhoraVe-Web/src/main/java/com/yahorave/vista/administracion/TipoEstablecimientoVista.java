@@ -1,4 +1,4 @@
-package com.yahorave.vista;
+package com.yahorave.vista.administracion;
 
 import java.io.Serializable;
 import java.util.List;

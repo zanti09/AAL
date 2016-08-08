@@ -59,8 +59,7 @@ body {
 #MENUSIDE {
     width: 85px;
     float: left;
-    background-color: #ffffff;
-    border-right: solid 1px #151d21;
+    background-color: #3D9970;
     overflow: hidden;
     width: 300px;
     position: fixed;
@@ -77,7 +76,6 @@ body {
     padding: 27px 0 5px 10px;
     z-index: 997;
     background-color: #ffffff;
-    margin-left: 100px
 }
 
 #LOGO img {
@@ -101,7 +99,7 @@ body {
     outline: none;
     border: 0px;
     border: none;
-    color: #9ba5ac;
+    color: #ffffff;
     border-radius: 20px;
     -webkit-box-shadow: inset 0px 0px 3px 0px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: inset 0px 0px 3px 0px rgba(0, 0, 0, 0.5);
@@ -133,7 +131,7 @@ body {
 }
 
 .MainLinkText {
-    color: #9ba5ac;
+    color: #ffffff;
     font-size: 20px;
     margin: 2px 0px 0px 10px;
     display: block;
@@ -641,7 +639,7 @@ a {
 }
 
 .bordersOfMenuSide {
-    border-top: solid 1px #404a4e;
+    border-top: solid 1px #ffffff;
 }
 
 .hiddenIcons {
