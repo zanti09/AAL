@@ -10,38 +10,38 @@
     </ui:define>
 
     <ui:define name="title">
-        Administración - <span class="subitem">Usuarios</span>
+        Administración - <span class="subitem">Productos</span>
     </ui:define>
 
     <ui:define name="implementation">
         <p:growl id="growl" life="2000"  autoUpdate="false" />
-        <ui:include src="_registroUsuario.xhtml" />
-        <ui:include src="_modificarUsuario.xhtml" />
-        <p:commandButton value="Crear" onclick="PF('dlgRegistrar').show();" />
+        <ui:include src="_registrarProducto.xhtml" />
+        <ui:include src="_modificarProducto.xhtml" />
+        <p:commandButton value="Crear"  onclick="PF('dlgRegistrar').show();"  />
 
-        <p:dataTable id="tblRegistros" var="usuario" value="#{usuarioVista.usuarios}" style="width: 800px;margin: 20px auto;">
+        <p:dataTable id="tblRegistros" var="producto" value="#{productosVista.productos}" style="width: 500px;margin: 20px auto;">
             <p:column headerText="Id" visible="false">
-                <h:outputText value="#{usuario.idusuario}" />
+                <h:outputText value="#{producto.idproducto}" />
             </p:column>
 
-            <p:column headerText="Nombre">
-                <h:outputText value="#{usuario.nombreusuario}" />
+            <p:column headerText="Nombre" >
+                <h:outputText value="#{producto.nombreproducto}" />
             </p:column>
-
-            <p:column headerText="Nickname">
-                <h:outputText value="#{usuario.nickusuario}" />
+            
+            <p:column headerText="Ingredientes" >
+                <h:outputText value="#{producto.ingredientesproducto}" />
             </p:column>
-
-            <p:column headerText="Contraseña">
-                <h:outputText value="#{usuario.passwordusuario}" />
+            
+            <p:column headerText="Precio" >
+                <h:outputText value="#{producto.precioproducto}" />
             </p:column>
 
             <p:column headerText="Modificar" width="60">
-                <p:commandButton id="btnModificar" update="frmModificar:panel" onclick="PF('dlgModificar').show();" action="#{usuarioVista.establecerUsuarioModificar(usuario)}" icon="ui-icon-pencil"/>                    
+                <p:commandButton id="btnModificar" update="frmModificar:panel" onclick="PF('dlgModificar').show();" action="#{productosVista.establecerProductoModificar(producto)}" icon="ui-icon-pencil"/>                    
             </p:column>
 
             <p:column headerText="Eliminar" width="60">
-                <p:commandButton id="btnEliminar" update="growl,tblRegistros" action="#{usuarioVista.eliminarUsuario(usuario)}" icon="ui-icon-trash">
+                <p:commandButton id="btnEliminar" update="growl,tblRegistros" action="#{productosVista.eliminarProducto(producto)}" icon="ui-icon-trash">
                     <p:confirm header="Confirmacion" message="¿Está Seguro de Eliminar el Registro?" icon="ui-icon-alert" />
                 </p:commandButton>
             </p:column>

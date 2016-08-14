@@ -3,31 +3,31 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:form id="frmRegistrar">
-        <p:dialog id="mdlRegistrar" header="Crear Usuario" widgetVar="dlgRegistrar" modal="true" showEffect="fade" hideEffect="fade" height="300" >
+    <h:form id="frmModificar">
+        <p:dialog id="mdlModificar" header="Crear Usuario" widgetVar="dlgModificar" modal="true" showEffect="fade" hideEffect="fade" height="300" >
             <p:panel id="panel" header="Información del Establecimiento" style="margin-bottom:10px;">
                 <p:messages id="msgRegistrar" />
                 <h:panelGrid id="pngDatos" columns="3" cellpadding="5">
                     <p:outputLabel for="nombre" value="Nombre:" />
-                    <p:inputText id="nombre" value="#{usuarioVista.usuario.nombreusuario}" required="true" label="Nombre">
+                    <p:inputText id="nombre" value="#{usuarioVista.usuarioModificar.nombreusuario}" required="true" label="Nombre">
                         <f:validateLength minimum="2" />
                     </p:inputText>
                     <p:message for="nombre" />
 
                     <p:outputLabel for="nick" value="Nickname:" />
-                    <p:inputText id="nick" value="#{usuarioVista.usuario.nickusuario}" required="true" label="Nickname"/>
+                    <p:inputText id="nick" value="#{usuarioVista.usuarioModificar.nickusuario}" required="true" label="Nickname"/>
                     <p:message for="nick" />
 
-                    <h:outputLabel for="pwd1" value="Contraseña: " />
-                    <p:password id="pwd1" value="#{usuarioVista.usuario.passwordusuario}" match="pwd2" label="Contraseña" required="true" />
+<!--                    <h:outputLabel for="pwd1" value="Contraseña: " />
+                    <p:password id="pwd1" value="#{usuarioVista.usuarioModificar.passwordusuario}" match="pwd2" label="Contraseña" required="true" />
                     <p:message for="pwd1" showDetail="true" />
 
                     <h:outputLabel for="pwd2" value="Rep. Contraseña: *" />
-                    <p:password id="pwd2" label="Rep. Contraseña" required="true" />
+                    <p:password id="pwd2" label="Rep. Contraseña" required="true" />-->
                 </h:panelGrid>
 
                 <div align="center">
-                    <p:commandButton id="btnGuardad" update="frmRegistrar:panel,growl,tblRegistros" value="Guardar" action="#{usuarioVista.guardarUsuario()}" icon="ui-icon-disk" />
+                    <p:commandButton id="btnGuardad" update="frmModificar:panel,growl,tblRegistros" value="Guardar" action="#{usuarioVista.modificarUsuario()}" icon="ui-icon-disk" />
                 </div>
             </p:panel>
         </p:dialog>

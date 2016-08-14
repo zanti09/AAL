@@ -6,6 +6,7 @@
 package com.yahorave.entidades;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -34,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Menu.findAll", query = "SELECT m FROM Menu m"),
     @NamedQuery(name = "Menu.findByIdmenu", query = "SELECT m FROM Menu m WHERE m.idmenu = :idmenu"),
-    @NamedQuery(name = "Menu.findByDescmenu", query = "SELECT m FROM Menu m WHERE m.descmenu = :descmenu")})
+    @NamedQuery(name = "Menu.findByDescmenu", query = "SELECT m FROM Menu m WHERE m.descmenu = :descmenu"),
+    @NamedQuery(name = "Menu.findByTiempopreparacion", query = "SELECT m FROM Menu m WHERE m.tiempopreparacion = :tiempopreparacion")})
 public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +48,8 @@ public class Menu implements Serializable {
     @Size(max = 100)
     @Column(name = "descmenu")
     private String descmenu;
+    @Column(name = "tiempopreparacion")
+    private BigInteger tiempopreparacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmenu")
     private List<Comentario> comentarioList;
     @JoinColumn(name = "idestablecimiento", referencedColumnName = "idestablecimiento")
@@ -78,6 +82,14 @@ public class Menu implements Serializable {
 
     public void setDescmenu(String descmenu) {
         this.descmenu = descmenu;
+    }
+
+    public BigInteger getTiempopreparacion() {
+        return tiempopreparacion;
+    }
+
+    public void setTiempopreparacion(BigInteger tiempopreparacion) {
+        this.tiempopreparacion = tiempopreparacion;
     }
 
     @XmlTransient

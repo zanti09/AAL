@@ -61,6 +61,12 @@ public class Usuario implements Serializable {
     private String passwordusuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
     private List<Establecimiento> establecimientoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
+    private List<Comentario> comentarioList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
+    private List<PerfilUsuario> perfilUsuarioList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
+    private List<RankingMenu> rankingMenuList;
 
     public Usuario() {
     }
@@ -115,6 +121,33 @@ public class Usuario implements Serializable {
 
     public void setEstablecimientoList(List<Establecimiento> establecimientoList) {
         this.establecimientoList = establecimientoList;
+    }
+
+    @XmlTransient
+    public List<Comentario> getComentarioList() {
+        return comentarioList;
+    }
+
+    public void setComentarioList(List<Comentario> comentarioList) {
+        this.comentarioList = comentarioList;
+    }
+
+    @XmlTransient
+    public List<PerfilUsuario> getPerfilUsuarioList() {
+        return perfilUsuarioList;
+    }
+
+    public void setPerfilUsuarioList(List<PerfilUsuario> perfilUsuarioList) {
+        this.perfilUsuarioList = perfilUsuarioList;
+    }
+
+    @XmlTransient
+    public List<RankingMenu> getRankingMenuList() {
+        return rankingMenuList;
+    }
+
+    public void setRankingMenuList(List<RankingMenu> rankingMenuList) {
+        this.rankingMenuList = rankingMenuList;
     }
 
     @Override

@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form id="frmModificar">
+        <p:dialog id="mdlModificar" header="Crear Usuario" widgetVar="dlgModificar" modal="true" showEffect="fade" hideEffect="fade" height="200"  >
+            <p:panel id="panel" header="Información del Establecimiento" style="margin-bottom:10px;">
+                <p:messages id="msgRegistrar" />
+                <h:panelGrid id="pngDatos" columns="3" cellpadding="5">
+                     <p:outputLabel for="nombre" value="Nombre:" />
+                     <p:inputText id="nombre" value="#{productosVista.productoModificar.nombreproducto}" required="true" label="Nombre">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="nombre" />
+                    
+                    <p:outputLabel for="ingredientes" value="Ingredientes:" />
+                    <p:inputText id="ingredientes" value="#{productosVista.productoModificar.ingredientesproducto}" required="true" label="Ingredientes">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="ingredientes" />
+                    
+                    <p:outputLabel for="precio" value="Precio:" />
+                    <p:inputText id="precio" value="#{productosVista.productoModificar.precioproducto}" required="true" label="Precio">
+                    </p:inputText>
+                    <p:message for="precio" />
+                </h:panelGrid>
+
+                <div align="center">
+                    <p:commandButton id="btnGuardad" update="frmModificar:panel,growl,tblRegistros" value="Guardar" action="#{productosVista.modificarProducto()}" icon="ui-icon-disk"/>
+                </div>
+            </p:panel>
+        </p:dialog>
+    </h:form>
+</ui:composition>

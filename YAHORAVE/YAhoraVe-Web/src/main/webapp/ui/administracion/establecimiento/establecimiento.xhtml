@@ -14,34 +14,49 @@
     </ui:define>
 
     <ui:define name="implementation">
+        <p:growl id="growl" life="2000"  autoUpdate="false" />
         <ui:include src="_registroEstablecimiento.xhtml" />
-        <p:commandButton class="pfcBoton" value="Crear" onclick="PF('dlgRegistrar').show();" action="#{establecimientoVista.inicializarEstablecimiento()}" />
+        <!--<ui:include src="_modificarEstablecimiento.xhtml" />-->
+        <p:commandButton value="Crear" onclick="PF('dlgRegistrar').show();" />
 
-        <p:dataTable id="tblTiposEstablecimiento" var="establecimientos" value="#{establecimientoVista.establecimientos}">
-            <p:column headerText="Id">
+        <p:dataTable id="tblRegistros" var="establecimientos" value="#{establecimientoVista.establecimientos}" style="margin: 20px auto;">
+            <p:column headerText="Id" visible="false">
                 <h:outputText value="#{establecimientos.idestablecimiento}" />
             </p:column>
 
             <p:column headerText="Nombre">
                 <h:outputText value="#{establecimientos.nombreestablecimiento}" />
             </p:column>
-            
+
             <p:column headerText="Dueño">
                 <h:outputText value="#{establecimientos.idusuario.nombreusuario}" />
             </p:column>
-            
+
             <p:column headerText="Tipo">
                 <h:outputText value="#{establecimientos.idtipoestablecimiento.tipoestablecimiento}" />
             </p:column>
-            
+
             <p:column headerText="Salida de la poli">
                 <h:outputText value="#{establecimientos.ubicacionestablecimiento}" />
             </p:column>
-            
+
             <p:column headerText="Descripción">
                 <h:outputText value="#{establecimientos.descestablecimiento}" />
             </p:column>
+<!--            <p:column headerText="Modificar" width="60">
+                <p:commandButton id="btnModificar" update="frmModificar:panel" onclick="PF('dlgModificar').show();" action="#{establecimientoVista.establecerEstablecimientoModificar(usuario)}" icon="ui-icon-pencil"/>                    
+            </p:column>
+
+            <p:column headerText="Eliminar" width="60">
+                <p:commandButton id="btnEliminar" update="growl,tblRegistros" action="#{establecimientoVista.eliminarEstablecimiento(usuario)}" icon="ui-icon-trash">
+                    <p:confirm header="Confirmacion" message="¿Está Seguro de Eliminar el Registro?" icon="ui-icon-alert" />
+                </p:commandButton>
+            </p:column>-->
         </p:dataTable>
+<!--        <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </p:confirmDialog>-->
     </ui:define>
 
 </ui:composition>

@@ -9,14 +9,25 @@
                 <p:messages id="msgRegistrar" />
                 <h:panelGrid id="pngDatos" columns="3" cellpadding="5">
                     <p:outputLabel for="nombre" value="Nombre:" />
-                    <p:inputText id="nombre" value="#{tipoEstablecimientosVista.tipoEstablecimiento.tipoestablecimiento}" required="true" label="Nombre">
+                    <p:inputText id="nombre" value="#{productosVista.producto.nombreproducto}" required="true" label="Nombre">
                         <f:validateLength minimum="2" />
                     </p:inputText>
                     <p:message for="nombre" />
+                    
+                    <p:outputLabel for="ingredientes" value="Ingredientes:" />
+                    <p:inputText id="ingredientes" value="#{productosVista.producto.ingredientesproducto}" required="true" label="Ingredientes">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="ingredientes" />
+                    
+                    <p:outputLabel for="precio" value="Precio:" />
+                    <p:inputText id="precio" value="#{productosVista.producto.precioproducto}" required="true" label="Precio">
+                    </p:inputText>
+                    <p:message for="precio" />
                 </h:panelGrid>
 
                 <div align="center">
-                    <p:commandButton id="btnGuardad" update="frmRegistrar:panel,growl,tblRegistros" value="Guardar" action="#{tipoEstablecimientosVista.guardarTipoEstablecimiento()}" icon="ui-icon-disk"/>
+                    <p:commandButton id="btnGuardad" update="frmRegistrar:panel,growl,tblRegistros" value="Guardar" action="#{productosVista.guardarProducto()}" icon="ui-icon-disk"/>
                 </div>
             </p:panel>
         </p:dialog>
