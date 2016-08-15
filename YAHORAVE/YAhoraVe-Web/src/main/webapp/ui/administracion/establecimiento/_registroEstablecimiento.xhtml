@@ -9,7 +9,7 @@
     </ui:define>
 
     <h:form id="frmRegistrar">
-        <p:dialog id="mdlRegistrar" header="Crear Usuario" widgetVar="dlgRegistrar" modal="true" showEffect="fade" hideEffect="fade" height="500" width="600" class="transparentDlg" >
+        <p:dialog id="mdlRegistrar" header="Crear Usuario" widgetVar="dlgRegistrar" modal="true" showEffect="fade" hideEffect="fade" height="500" width="800" class="transparentDlg" >
             <p:panel id="panel" header="Información del Establecimiento" style="margin-bottom:10px;width: 100%;" >
                 <p:messages id="msgRegistrar" />
                 <h:panelGrid id="pngDatos" columns="3" cellpadding="5">
@@ -20,9 +20,14 @@
                     <p:message for="nombre" />
 
                     <p:outputLabel for="salidaPoli" value="Salida de la Poli:" />
-                    <p:inputText id="salidaPoli" value="#{establecimientoVista.establecimiento.ubicacionestablecimiento}" required="true" label="Salilda de la Poli">
-                        <f:validateLength minimum="2" />
-                    </p:inputText>
+                    <p:selectOneMenu id="salidaPoli" value="#{establecimientoVista.establecimiento.ubicacionestablecimiento}" required="true" style="width:125px">
+                        <f:selectItem itemLabel="" itemValue=""/>
+                        <f:selectItem itemLabel="SalidaCEC a la Toledo" itemValue="toledo"/>
+                        <f:selectItem itemLabel="Salida por Ing. Eléctrica" itemValue="electrica"/>
+                        <f:selectItem itemLabel="Salida por Ing. Civil" itemValue="civil"/>
+                        <f:selectItem itemLabel="Salida por Av. Mena Caamaño" itemValue="mcaamaño"/>
+                        <f:selectItem itemLabel="Salida por Teatro Politécnico" itemValue="teatro"/>
+                    </p:selectOneMenu>
                     <p:message for="salidaPoli" />
 
                     <p:outputLabel for="descripcion" value="Descripción:" />

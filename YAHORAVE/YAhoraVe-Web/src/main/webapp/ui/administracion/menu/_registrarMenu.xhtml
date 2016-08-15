@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form id="frmRegistrar">
+        <p:dialog id="mdlRegistrar" header="Crear Usuario" widgetVar="dlgRegistrar" modal="true" showEffect="fade" hideEffect="fade" height="300" width="800">
+            <p:panel id="panel" header="Información del Establecimiento" style="margin-bottom:10px;">
+                <p:messages id="msgRegistrar" />
+                <h:panelGrid id="pngDatos" columns="3" cellpadding="5">
+                    <p:outputLabel for="establecimiento" value="Establecimiento:" />
+                    <p:selectOneMenu id="establecimiento" value="#{menuVista.establecimiento.idestablecimiento}" style="width:125px" required="true">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{menuVista.lstEstablecimiento}" var="establecimiento" itemLabel="#{establecimiento.nombreestablecimiento}" itemValue="#{establecimiento.idestablecimiento}" />
+                    </p:selectOneMenu>
+                    <p:message for="establecimiento" />
+                </h:panelGrid>
+                <p:dataTable id="menuEstablecimiento" var="producto" value="#{menuVista.lstProductos}" selection="#{menuVista.lstProductosMenu}" rowKey="#{producto.idproducto}" style="margin: 10px auto;">
+                    <f:facet name="header">
+                        Menu
+                    </f:facet>
+                    <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                    <p:column headerText="Id" visible="false">
+                        <h:outputText value="#{producto.idproducto}" />
+                    </p:column>
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{producto.nombreproducto}" />
+                    </p:column>
+                    <p:column headerText="Ingredientes">
+                        <h:outputText value="#{producto.ingredientesproducto}" />
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{producto.precioproducto}" />
+                    </p:column>
+                </p:dataTable>
+
+                <div align="center">
+                    <p:commandButton id="btnGuardad" update="frmRegistrar:panel,growl" value="Guardar" action="#{menuVista.guardarMenu()}" icon="ui-icon-disk"/>
+                </div>
+            </p:panel>
+        </p:dialog>
+    </h:form>
+</ui:composition>

@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    </ui:define>
+
+    <ui:define name="title">
+        Administración - <span class="subitem">Tipos Establecimientos</span>
+    </ui:define>
+
+    <ui:define name="implementation">
+        <p:growl id="growl" life="2000"  autoUpdate="false" />
+        <ui:include src="_registrarMenu.xhtml" />
+        <!--<ui:include src="_modificarTipoEstablecimiento.xhtml" />-->
+        <p:commandButton value="Crear"  onclick="PF('dlgRegistrar').show();"  />
+
+<!--        <p:dataTable id="tblRegistros" var="menu" value="#{menuVista.lstMenus}" style="width: 500px;margin: 20px auto;">
+            <p:column headerText="Id" visible="false">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Establecimiento" >
+                <h:outputText value="#{menu.idestablecimiento.nombreestablecimiento}" />
+            </p:column>
+
+            <p:column headerText="Modificar" width="60">
+                <p:commandButton id="btnModificar" update="frmModificar:panel" onclick="PF('dlgModificar').show();" action="" icon="ui-icon-pencil"/>                    
+            </p:column>
+
+            <p:column headerText="Eliminar" width="60">
+                <p:commandButton id="btnEliminar" update="growl,tblRegistros" action="" icon="ui-icon-trash">
+                    <p:confirm header="Confirmacion" message="¿Está Seguro de Eliminar el Registro?" icon="ui-icon-alert" />
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </p:confirmDialog>-->
+
+<!--        <p:dialog id="mdlModificar" header="Crear Usuario" widgetVar="dlgMenu" modal="true" showEffect="fade" hideEffect="fade" height="200"  >
+            <p:panel id="panel" header="Información del Establecimiento" style="margin-bottom:10px;">
+                <p:messages id="msgRegistrar" />
+                <h:panelGrid id="pngDatos" columns="3" cellpadding="5">
+                    <p:outputLabel for="nombre" value="Nombre:" />
+                    <p:inputText id="nombre" value="#{tipoEstablecimientosVista.tipoEstablecimientosModificar.tipoestablecimiento}" required="true" label="Nombre">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="nombre" />
+                </h:panelGrid>
+
+                <div align="center">
+                    <p:commandButton id="btnGuardad" update="frmModificar:panel,growl,tblRegistros" value="Guardar" action="#{tipoEstablecimientosVista.modificarTipoEstablecimiento()}" icon="ui-icon-disk"/>
+                </div>
+            </p:panel>
+        </p:dialog>-->
+
+    </ui:define>
+
+</ui:composition>

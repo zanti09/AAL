@@ -30,13 +30,6 @@ public class EstablecimientoVista implements Serializable {
     private List<Establecimiento> lstEstablecimiento;
     private Establecimiento establecimiento;
     private TipoEstablecimiento tipoEstablecimiento;
-    private Menu menu;
-    private List<Menu> lstMenu;
-    private Producto productoAgregar;
-    private Producto productoQuitar;
-    private List<Producto> lstProductos;
-    private List<Producto> lstProductosMenu;
-    private ProductoVista productoVista = new ProductoVista();
     private Usuario usuario;
     private GsonBuilder builder = new GsonBuilder();
     private Gson gson = builder.setDateFormat("yyyy-MM-dd").create();
@@ -53,12 +46,10 @@ public class EstablecimientoVista implements Serializable {
         establecimiento = new Establecimiento();
         tipoEstablecimiento = new TipoEstablecimiento();
         usuario = new Usuario();
-        lstMenu = new ArrayList<>();
         emptyModel = new DefaultMapModel();
         establecimiento.setIdtipoestablecimiento(new TipoEstablecimiento());
         establecimiento.setIdusuario(new Usuario());
         lstEstablecimiento = consultarEstablecimientos();
-        lstProductos = productoVista.consultarProductos();
     }
 
     public List<Establecimiento> getEstablecimientos() {
@@ -77,56 +68,10 @@ public class EstablecimientoVista implements Serializable {
         return usuario;
     }
 
-    public void setProductoAgregar(Producto productoAgregar) {
-        this.productoAgregar = productoAgregar;
-    }
-
-    public void setProductoQuitar(Producto productoQuitar) {
-        this.productoQuitar = productoQuitar;
-    }
-
-    public Producto getProductoAgregar() {
-        return productoAgregar;
-    }
-
-    public Producto getProductoQuitar() {
-        return productoQuitar;
-    }
-    
-    
-
-    public List<Producto> getLstProductos() {
-        return lstProductos;
-    }
-
-    public List<Producto> getLstProductosMenu() {
-        return lstProductosMenu;
-    }
-
     public List<Establecimiento> consultarEstablecimientos() {
         String strListaEstablecimientos = establecimientoCliente.findAll(String.class);
         return gson.fromJson(strListaEstablecimientos, new TypeToken<List<Establecimiento>>() {
         }.getType());
-    }
-
-    public void agregarProductoMenu() {
-        if (productoAgregar != null) {
-            lstProductosMenu.add(productoAgregar);
-            lstProductos.remove(productoAgregar);
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Seleccione un producto", null));
-        }
-
-    }
-
-    public void quitarProductoMenu() {
-        if (productoQuitar != null) {
-            lstProductos.add(productoQuitar);
-            lstProductosMenu.remove(productoQuitar);
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Seleccione un producto", null));
-        }
-
     }
 
     public void guardarEstablecimiento() {
@@ -137,7 +82,7 @@ public class EstablecimientoVista implements Serializable {
         establecimiento = new Establecimiento();
         emptyModel.getMarkers().clear();
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "El registro ha sido guardado excitosamente", null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "El registro ha sido guardado exitosamente", null));
     }
 
     public MapModel getEmptyModel() {

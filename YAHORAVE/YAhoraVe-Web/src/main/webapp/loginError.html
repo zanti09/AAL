@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>Error Login</title>
+        <style type="text/css">
+            body{
+                padding: 0px;
+                margin: 0px;
+                overflow: hidden;
+            }
+
+            #principal{
+                margin:0px;
+                padding: 0px;
+                background: -webkit-linear-gradient(left, rgb(0,116,217) , rgb(61,153,112));
+                width: 100%;
+                height: 100%;  
+            }
+
+            .form{
+                position: absolute;
+                margin: 150px auto;
+                left: 0;
+                right: 0;
+                width:300px;
+                height: 250px;
+                background-color: rgb(240,240,240);
+                padding:20px;
+                font-size: 40px;
+            }
+            
+            .form a:hover{
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="principal">
+            <div class="form">
+                No se pudo autenticar
+            </div>
+            <a href="#{request.contextPath}/index.xhtml">Aceptar</a>
+        </div>
+
+        <script language="javascript">
+
+        </script>
+    </body>
+</html>

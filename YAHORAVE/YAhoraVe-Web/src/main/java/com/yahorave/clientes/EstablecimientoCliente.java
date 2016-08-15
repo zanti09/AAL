@@ -54,6 +54,18 @@ public class EstablecimientoCliente {
         resource = resource.path(java.text.MessageFormat.format("{0}/{1}", new Object[]{from, to}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
+    
+    public <T> T findByUbicacionestablecimiento(Class<T> responseType, String ubicacionestablecimiento) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("findByUbicacionestablecimiento/{0}", new Object[]{ubicacionestablecimiento}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+    
+    public <T> T findByTipoEstablecimiento(Class<T> responseType, String idtipoestablecimiento) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("findByTipoEstablecimiento/{0}", new Object[]{idtipoestablecimiento}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
 
     public void create(Object requestEntity) throws ClientErrorException {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));

@@ -11,15 +11,12 @@ import com.google.gson.reflect.TypeToken;
 import com.yahorave.clientes.EstablecimientoCliente;
 import com.yahorave.entidades.Establecimiento;
 import com.yahorave.entidades.TipoEstablecimiento;
-import com.yahorave.entidades.Usuario;
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -30,47 +27,42 @@ import org.primefaces.model.map.Marker;
  *
  * @author santi
  */
-@ManagedBean(name="establecimientosCercanosVista")
-@ViewScoped
+@ManagedBean(name = "establecimientosCercanosVista")
+@ApplicationScoped
 public class EstablecimientosCercanosVista implements Serializable {
+
     private List<Establecimiento> lstEstablecimiento;
-    private Establecimiento establecimiento;
+    private Establecimiento est;
     private TipoEstablecimiento tipoEstablecimiento;
-    private Usuario usuario;
+    private String salida="";
     private GsonBuilder builder = new GsonBuilder();
     private Gson gson = builder.setDateFormat("yyyy-MM-dd").create();
+    private static final String URL_UBICACION_ESTABLECIMIENTOS = "/ui/ubicacion/establecimientosCercanos?faces-redirect=true";
 
-    private MapModel advancedModel; 
+    private MapModel advancedModel;
     private Marker marker;
-    private MapModel emptyModel;
-    private String title;
-    private double lat;
-    private double lng;
-    private boolean markerEmpty=true;
 
     private EstablecimientoCliente establecimientoCliente = new EstablecimientoCliente();
 
     @PostConstruct
     public void init() {
+        tipoEstablecimiento = new TipoEstablecimiento();
         advancedModel = new DefaultMapModel();
-        
-        String strListaEstablecimientos = establecimientoCliente.findAll(String.class);
-        lstEstablecimiento = gson.fromJson(strListaEstablecimientos, new TypeToken<List<Establecimiento>>() {
-        }.getType());
-        for(Establecimiento est:lstEstablecimiento){
+        lstEstablecimiento = new ArrayList<>();
+        for (Establecimiento est : lstEstablecimiento) {
             LatLng coord = new LatLng(est.getLatitud().doubleValue(), est.getLongitud().doubleValue());
             advancedModel.addOverlay(new Marker(coord, est.getNombreestablecimiento()));
         }
     }
-    
+
     public MapModel getAdvancedModel() {
         return advancedModel;
     }
-      
+
     public void onMarkerSelect(OverlaySelectEvent event) {
         marker = (Marker) event.getOverlay();
     }
-      
+
     public Marker getMarker() {
         return marker;
     }
@@ -78,67 +70,59 @@ public class EstablecimientosCercanosVista implements Serializable {
     public List<Establecimiento> getEstablecimientos() {
         return lstEstablecimiento;
     }
-    
-    public Establecimiento getEstablecimiento(){
-        return establecimiento;
-    }
 
     public TipoEstablecimiento getTipoEstablecimiento() {
         return tipoEstablecimiento;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getSalida() {
+        return salida;
     }
 
-    public boolean isMarkerEmpty() {
-        return markerEmpty;
-    }   
+    public void setSalida(String salida) {
+        this.salida = salida;
+    }    
 
-    public void inicializarEstablecimiento() {
-        establecimiento = new Establecimiento();
+    public Establecimiento getEst() {
+        return est;
     }
 
-    public void guardarEstablecimiento() {
-        establecimiento.setIdusuario(usuario);
-        establecimiento.setIdtipoestablecimiento(tipoEstablecimiento);
-        establecimientoCliente.create(establecimiento);
+    public void setEst(Establecimiento est) {
+        this.est = est;
     }
     
-    public MapModel getEmptyModel() {
-        return emptyModel;
+    public String filtrarPorTipoEstablecimiento() {
+        String strListaEstablecimientos = establecimientoCliente.findByTipoEstablecimiento(String.class, tipoEstablecimiento.getIdtipoestablecimiento().toString());
+        lstEstablecimiento = gson.fromJson(strListaEstablecimientos, new TypeToken<List<Establecimiento>>() {
+        }.getType());
+        addMarkers(lstEstablecimiento);
+        return URL_UBICACION_ESTABLECIMIENTOS;
     }
-      
-    public String getTitle() {
-        return title;
+    
+    public String filtrarPorSalida() {
+        String strListaEstablecimientos = establecimientoCliente.findByUbicacionestablecimiento(String.class, salida);
+        lstEstablecimiento = gson.fromJson(strListaEstablecimientos, new TypeToken<List<Establecimiento>>() {
+        }.getType());
+        addMarkers(lstEstablecimiento);
+        return URL_UBICACION_ESTABLECIMIENTOS;
     }
-  
-    public void setTitle(String title) {
-        this.title = title;
+
+    public String ubicarTodosEstablecimientos() {
+        String strListaEstablecimientos = establecimientoCliente.findAll(String.class);
+        lstEstablecimiento = gson.fromJson(strListaEstablecimientos, new TypeToken<List<Establecimiento>>() {
+        }.getType());
+        addMarkers(lstEstablecimiento);
+        return URL_UBICACION_ESTABLECIMIENTOS;
     }
-  
-    public double getLat() {
-        return lat;
+
+    public void addMarkers(List<Establecimiento> lstEstablecimientos) {
+        advancedModel.getMarkers().clear();
+        for (Establecimiento est : lstEstablecimiento) {
+            LatLng coord = new LatLng(est.getLatitud().doubleValue(), est.getLongitud().doubleValue());
+            advancedModel.addOverlay(new Marker(coord, est.getNombreestablecimiento(),est));
+        }
     }
-  
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-  
-    public double getLng() {
-        return lng;
-    }
-  
-    public void setLng(double lng) {
-        this.lng = lng;
-    }
-      
-    public void addMarker() {
-        Marker marker = new Marker(new LatLng(lat, lng), title);
-        establecimiento.setLongitud(BigDecimal.valueOf(lng));
-        establecimiento.setLatitud(BigDecimal.valueOf(lat));
-        emptyModel.addOverlay(marker);
-          
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Added", "Lat:" + lat + ", Lng:" + lng));
+    public Establecimiento casEstablecimiento(Object obj){
+        return (Establecimiento) obj;
     }
 }

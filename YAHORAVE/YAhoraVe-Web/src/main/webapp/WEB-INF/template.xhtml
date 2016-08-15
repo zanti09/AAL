@@ -55,12 +55,12 @@
                     <div id="MENUSIDEindent">
 
                         <span id="LOGO" class="bordersOfMenuSide">
-                            <!--<h:graphicImage name="main/images/logoYahoraVe.jpg"/>-->
+                            <h:graphicImage name="main/images/logoYahoraVe.jpg"/>
                         </span>
 
-                <!--                <div class="MenuSideMainLink bordersOfMenuSide"><h:graphicImage name="main/images/zoom.svg" class="zoomIcon"/>
-                                    <input id="menuSearch" type="text" placeholder="Search Menu" class="boldFont fontSize14 mustClose searchInput"/>
-                                </div>-->
+                        <!--                <div class="MenuSideMainLink bordersOfMenuSide"><h:graphicImage name="main/images/zoom.svg" class="zoomIcon"/>
+                                            <input id="menuSearch" type="text" placeholder="Search Menu" class="boldFont fontSize14 mustClose searchInput"/>
+                                        </div>-->
 
 
                         <!--
@@ -75,7 +75,7 @@
                             PRESUPUESTO
                             *****************
                             -->
-                            <span id="SubMenu-Ajax1" class="MenuSideMainLink bordersOfMenuSide"
+<!--                            <span id="SubMenu-Ajax1" class="MenuSideMainLink bordersOfMenuSide"
                                   onclick="Showcase.openSubMenu(this);">
                                 <span class="MainLinkText">Presupuesto</span>
                             </span>
@@ -83,7 +83,7 @@
                             <div class="SubMenuLinkContainer">
                                 <p:outputLabel for="Presupuesto" value="Presupuesto en dólares: "/>
                                 <h:inputText id="Presupuesto" class="PresupuestoInput">Ingrese su puesupuesto</h:inputText>
-                            </div>
+                            </div>-->
 
                             <!--
                             *****************
@@ -96,14 +96,17 @@
                             </span>
 
                             <div class="SubMenuLinkContainer">
-                                <!--                        <p:outputLabel for="salidas" value="Salidas:"/>
-                                                        <p:selectOneListbox id="salidas" value="">
-                                                            <f:selectItem itemLabel="Salida del CEC a la Toledo" itemValue="toledo"/>
-                                                            <f:selectItem itemLabel="Salida por Ing. Eléctrica" itemValue="electrica"/>
-                                                            <f:selectItem itemLabel="Salida por Ing. Civil" itemValue="civil"/>
-                                                            <f:selectItem itemLabel="Salida por Av. Mena Caamaño" itemValue="mcaamaño"/>
-                                                            <f:selectItem itemLabel="Salida por Teatro Politécnico" itemValue="teatro"/>
-                                                        </p:selectOneListbox>-->
+                                <p:outputLabel for="salidas" value="Salidas:"/>
+                                <p:selectOneListbox id="salidas" value="#{establecimientosCercanosVista.salida}">
+                                    <f:selectItem itemLabel="SalidaCEC a la Toledo" itemValue="toledo"/>
+                                    <f:selectItem itemLabel="Salida por Ing. Eléctrica" itemValue="electrica"/>
+                                    <f:selectItem itemLabel="Salida por Ing. Civil" itemValue="civil"/>
+                                    <f:selectItem itemLabel="Salida por Av. Mena Caamaño" itemValue="mcaamaño"/>
+                                    <f:selectItem itemLabel="Salida por Teatro Politécnico" itemValue="teatro"/>
+                                </p:selectOneListbox>
+                                <div class="MenuControl">
+                                    <p:commandButton id="btnFiltarPorSalida" value="Filtrar" action="#{establecimientosCercanosVista.filtrarPorSalida()}" />
+                                </div> 
                             </div>
 
 
@@ -118,77 +121,67 @@
                             </span>
 
                             <div class="SubMenuLinkContainer">
-                                <!--                        <p:outputLabel for="tipoEstablecimiento" value=""/>
-                                                        <p:selectOneListbox id="tipoEstablecimiento" value="">
-                                                            <f:selectItem itemLabel="Puestos" itemValue="1"/>
-                                                            <f:selectItem itemLabel="Huecas" itemValue="2"/>
-                                                            <f:selectItem itemLabel="Restaurantes" itemValue="3"/>
-                                                        </p:selectOneListbox>-->
+                                <p:outputLabel for="tipoEstablecimiento" value=""/>
+                                <p:selectOneListbox id="tipoEstablecimiento" value="#{establecimientosCercanosVista.tipoEstablecimiento.idtipoestablecimiento}">
+                                    <f:selectItems itemLabel="Huecas" itemValue="2"/>
+                                    <f:selectItems value="#{tipoEstablecimientosVista.tiposEstablecimientos}" var="tipoEstablecimiento" itemLabel="#{tipoEstablecimiento.tipoestablecimiento}" itemValue="#{tipoEstablecimiento.idtipoestablecimiento}" />
+                                </p:selectOneListbox>
+
+                                <div class="MenuControl">
+                                    <p:commandButton id="btnFiltarPorTipo" value="Filtrar" action="#{establecimientosCercanosVista.filtrarPorTipoEstablecimiento()}" />
+                                </div>            
                             </div>
 
-                            <!--
-                            ******************
-                            ESTABLEC. CERCANOS
-                            ******************
-                            -->
-                            <span id="SubMenu-Ajax4" class="MenuSideMainLink bordersOfMenuSide"
-                                  onclick="Showcase.openSubMenu(this);">
-                                <span class="MainLinkText">Establecimientos cercanos</span>
-                            </span>
-
-                            <div class="SubMenuLinkContainer">
-                                <a class="SubMenuLink" href="#{request.contextPath}/ui/ubicacion/establecimientosCercanos.xhtml">&bull;Escoge tus establecimientos cercanos</a>
-                            </div>
                             <!--
                             *************************
                             TIEMPO DE PREPARACIÓN
                             *************************
                             -->
-                            <span id="SubMenu-Ajax5" class="MenuSideMainLink bordersOfMenuSide"
+<!--                            <span id="SubMenu-Ajax5" class="MenuSideMainLink bordersOfMenuSide"
                                   onclick="Showcase.openSubMenu(this);">
                                 <span class="MainLinkText">Tiempo de preparación</span>
                             </span>
                             <div class="SubMenuLinkContainer">
                                 <p:outputLabel for="tiempoPreparacion" value="Tiempo de preparación en minutos"/>
                                 <h:inputText id="tiempoPreparacion" class="PresupuestoInput"></h:inputText>
+                            </div>  
+-->                            <div class="MenuControl">
+                                <p:commandButton id="btnTodosEstablecimientos" value="Todos los establecimientos" action="#{establecimientosCercanosVista.ubicarTodosEstablecimientos()}" />
                             </div>
-                            <div class="MenuControl">
-                                <p:commandButton value="Filtrar" id="Filtrar" ajax="false" />
-                            </div>                    
                         </h:form>
 
                     </div>
-                    </div>
+                </div>
 
-        <script type="text/javascript">
-            restoreMenuState();
-        </script>
+                <script type="text/javascript">
+                    restoreMenuState();
+                </script>
 
-        <div id="CONTENTSIDE">
-            <div id="CONTENTSIDEindent">
-                <!-- header bar start-->
-                <div class="ContentSideSections" id="PFTopLinksCover" style="height:30px;">
-                    <a id="homeLink" href="#{request.contextPath}/index.xhtml">¿ Y AHORA VE ?</a>
-                    <ul id="menuContenido">
-                        <li class="menuPrincipal" >
-                            <span>Administración</span>
-                            <ul class="subMenuContenido">
-                                <li class="subMenu">
-                                    <a href="#{request.contextPath}/ui/administracion/usuario/usuario.xhtml">Usuario</a>
-                                </li>
-                                <li class="subMenu">
-                                    <a href="#{request.contextPath}/ui/administracion/establecimiento/establecimiento.xhtml">Establecimientos</a>
-                                </li>
-                                <li class="subMenu">
-                                    <a href="#{request.contextPath}/ui/administracion/tipoEstablecimiento/tipoEstablecimiento.xhtml">Tipos Establecimientos</a>
-                                </li>
-                                <li class="subMenu">
-                                    <a href="#{request.contextPath}/ui/administracion/producto/producto.xhtml">Productos</a>
+                <div id="CONTENTSIDE">
+                    <div id="CONTENTSIDEindent">
+                        <!-- header bar start-->
+                        <div class="ContentSideSections" id="PFTopLinksCover" style="height:30px;">
+                            <a id="homeLink" href="#{request.contextPath}/index.xhtml">¿ Y AHORA VE ?</a>
+                            <ul id="menuContenido">
+                                <li class="menuPrincipal" >
+                                    <span>Administración</span>
+                                    <ul class="subMenuContenido">
+                                        <li class="subMenu">
+                                            <a href="#{request.contextPath}/ui/administracion/usuario/usuario.xhtml">Usuario</a>
+                                        </li>
+                                        <li class="subMenu">
+                                            <a href="#{request.contextPath}/ui/administracion/establecimiento/establecimiento.xhtml">Establecimientos</a>
+                                        </li>
+                                        <li class="subMenu">
+                                            <a href="#{request.contextPath}/ui/administracion/tipoEstablecimiento/tipoEstablecimiento.xhtml">Tipos Establecimientos</a>
+                                        </li>
+                                        <li class="subMenu">
+                                            <a href="#{request.contextPath}/ui/administracion/producto/producto.xhtml">Productos</a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
 
                         <!-- header bar end-->
 

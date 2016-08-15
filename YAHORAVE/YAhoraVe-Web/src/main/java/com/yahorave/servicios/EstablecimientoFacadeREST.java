@@ -7,9 +7,11 @@ package com.yahorave.servicios;
 
 import com.yahorave.entidades.Establecimiento;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -83,9 +85,39 @@ public class EstablecimientoFacadeREST extends AbstractFacade<Establecimiento> {
         return String.valueOf(super.count());
     }
 
+    @GET
+    @Path("findByTipoEstablecimiento/{idtipoestablecimiento}")
+    @Produces({"application/json"})
+    public List<Establecimiento> findByTipoEstablecimiento(@PathParam("idtipoestablecimiento") Integer idtipoestablecimiento) {
+        try {//             
+            TypedQuery<Establecimiento> query = em.createNamedQuery("Establecimiento.findByTipoEstablecimiento", Establecimiento.class);
+            query.setParameter("idtipoestablecimiento", idtipoestablecimiento);
+            List<Establecimiento> result = query.getResultList();
+            return result;
+        } catch (javax.persistence.NoResultException nr) {
+            Logger.getLogger(EstablecimientoFacadeREST.class.getName()).severe(nr.getMessage());
+        }
+        return null;
+    }
+
+    @GET
+    @Path("findByUbicacionestablecimiento/{ubicacionestablecimiento}")
+    @Produces({"application/json"})
+    public List<Establecimiento> findByUbicacionestablecimiento(@PathParam("ubicacionestablecimiento") String ubicacionestablecimiento) {
+        try {//             
+            TypedQuery<Establecimiento> query = em.createNamedQuery("Establecimiento.findByUbicacionestablecimiento", Establecimiento.class);
+            query.setParameter("ubicacionestablecimiento", ubicacionestablecimiento);
+            List<Establecimiento> result = query.getResultList();
+            return result;
+        } catch (javax.persistence.NoResultException nr) {
+            Logger.getLogger(EstablecimientoFacadeREST.class.getName()).severe(nr.getMessage());
+        }
+        return null;
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
