@@ -10,5 +10,7 @@
     </properties>
   <modules>
     <module>YAhoraVe-Web</module>
+    <module>CodeVita</module>
+    <module>Proyectos</module>
   </modules>
 </project>
