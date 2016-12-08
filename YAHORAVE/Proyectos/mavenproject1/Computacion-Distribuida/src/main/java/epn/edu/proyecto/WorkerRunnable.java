@@ -28,6 +28,7 @@ public class WorkerRunnable implements Runnable {
         try {
             DataInputStream dataIn = new DataInputStream(clientSocket.getInputStream());
             String fileName=dataIn.readUTF();
+            
             InputStream in = clientSocket.getInputStream();
             try {
                 FileOutputStream out = new FileOutputStream("C:\\Computacion Distribuida\\" + fileName);
