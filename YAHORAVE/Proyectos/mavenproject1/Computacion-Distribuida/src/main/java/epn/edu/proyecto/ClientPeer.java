@@ -42,7 +42,7 @@ public class ClientPeer extends Thread {
 
     public void uploadFile(File file) throws FileNotFoundException, IOException {        
         DataOutputStream dataOut=new DataOutputStream(clientSocket.getOutputStream());
-        dataOut.writeChars(file.getName());
+        dataOut.writeUTF(file.getName());
         OutputStream out=clientSocket.getOutputStream();
         try {
             byte[] bytes = new byte[64 * 1024];

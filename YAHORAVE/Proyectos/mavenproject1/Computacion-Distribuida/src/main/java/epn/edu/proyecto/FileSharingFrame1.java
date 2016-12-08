@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -159,12 +160,22 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     private void subirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirArchivoActionPerformed
         jChooser = new JFileChooser();
         jChooser.setDialogTitle("Seleccionar Carpeta");
-
+        boolean subidoExcitosamente = false;
+        File selectdFiel;
         if (jChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            selectdFiel = jChooser.getSelectedFile();
             for (ClientPeer cliente : lstClientes) {
-
                 try {
-                    cliente.uploadFile(jChooser.getSelectedFile());
+                    cliente.uploadFile(selectdFiel);
+                    subidoExcitosamente = true;
+                } catch (IOException ex) {
+                    Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (subidoExcitosamente) {
+                try {
+                    FileUtils.copyFile(selectdFiel, new File("C:\\Computacion Distribuida\\"+selectdFiel.getName()));
+                    modelList.addElement(selectdFiel.getName());
                 } catch (IOException ex) {
                     Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
                 }
