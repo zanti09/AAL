@@ -1,5 +1,6 @@
 package epn.edu.proyecto;
 
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import org.apache.commons.io.IOUtils;
 
 public class WorkerRunnable implements Runnable {
 
@@ -24,24 +26,27 @@ public class WorkerRunnable implements Runnable {
     @Override
     public void run() {
         try {
+            DataInputStream dataIn = new DataInputStream(clientSocket.getInputStream());
+            String fileName=dataIn.readUTF();
             InputStream in = clientSocket.getInputStream();
-//            ObjectInput s = new ObjectInputStream(in);
-            File file = new File("C:\\prueba.txt");
             try {
-                FileOutputStream out = new FileOutputStream("C:\\Computacion Distribuida\\" + file.getName());
+                FileOutputStream out = new FileOutputStream("C:\\Computacion Distribuida\\" + fileName);
                 byte[] bytes = new byte[64 * 1024];
 
                 int count;
                 while ((count = in.read(bytes)) > 0) {
                     out.write(bytes, 0, count);
+                    System.err.println(count);
                 }
+                System.err.println("despues");
                 out.close();
-                ((IFilesManager) frame).updateFileAdded(file);
+                System.err.println("mucho despues");
+                ((IFilesManager) frame).updateFileAdded(fileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             finally{
-                in.close();
+                IOUtils.closeQuietly(in);
             }
         } catch (IOException e) {
             e.printStackTrace();
