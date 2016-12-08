@@ -5,23 +5,16 @@
  */
 package epn.edu.proyecto;
 
-import epn.edu.compu.clases.Person;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import static java.lang.System.in;
-import static java.lang.System.out;
 import java.net.InetAddress;
 import java.net.Socket;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -47,11 +40,13 @@ public class ClientPeer extends Thread {
         }
     }
 
-    public void uploadFile(File file) throws FileNotFoundException, IOException {
+    public void uploadFile(File file) throws FileNotFoundException, IOException {        
+        DataOutputStream dataOut=new DataOutputStream(clientSocket.getOutputStream());
+        dataOut.writeChars(file.getName());
+        OutputStream out=clientSocket.getOutputStream();
         try {
             byte[] bytes = new byte[64 * 1024];
-            InputStream in = new FileInputStream(file);
-            OutputStream out = clientSocket.getOutputStream();
+            InputStream in = new FileInputStream(file);            
 
             int count;
             while ((count = in.read(bytes)) > 0) {
@@ -59,7 +54,7 @@ public class ClientPeer extends Thread {
             }
             in.close();
         } finally {
-            out.close();
+            IOUtils.closeQuietly(out);
         }
     }
 
