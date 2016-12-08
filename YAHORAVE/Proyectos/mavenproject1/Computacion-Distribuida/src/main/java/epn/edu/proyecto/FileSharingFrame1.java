@@ -21,7 +21,7 @@ import javax.swing.JFileChooser;
  *
  * @author santi
  */
-public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManager{
+public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManager {
 
     private String rutaCarpetaCompartida;
     private JFileChooser jChooser;
@@ -36,9 +36,9 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     public FileSharingFrame1() {
         initComponents();
         jlsArchivos.setModel(modelList);
-        ServerPeer server = new ServerPeer(puertoLocal,this);
+        ServerPeer server = new ServerPeer(puertoLocal, this);
         server.start();
-        
+
     }
 
     /**
@@ -141,9 +141,10 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
         try (BufferedReader br = new BufferedReader(new FileReader(archivoPuertos))) {
             String line;
             while ((line = br.readLine()) != null) {
-                Integer puertoCliente = Integer.parseInt(line);
+                Integer puertoCliente = Integer.parseInt(line.split(":")[1]);
+                String ipServer = line.split(":")[0];
                 if (!puertoCliente.equals(puertoLocal)) {
-                    cliente = new ClientPeer(puertoCliente, puertoLocal);
+                    cliente = new ClientPeer(puertoCliente, ipServer);
                     cliente.start();
                     lstClientes.add(cliente);
                 }
@@ -161,7 +162,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
 
         if (jChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             for (ClientPeer cliente : lstClientes) {
-                
+
                 try {
                     cliente.uploadFile(jChooser.getSelectedFile());
                 } catch (IOException ex) {
@@ -169,8 +170,6 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
                 }
             }
 
-
-            
         }
 
         // TODO add your handling code here:

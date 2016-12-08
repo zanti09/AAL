@@ -28,18 +28,18 @@ import java.net.Socket;
 public class ClientPeer extends Thread {
 
     int port;
-    int localPort;
+    String serverIP;
     private Socket clientSocket;
 
-    public ClientPeer(int port, int localPort) {
+    public ClientPeer(int port, String serverIP) {
         this.port = port;
-        this.localPort = localPort;
+        this.serverIP = serverIP;
     }
 
     @Override
     public void run() {
         try {
-            clientSocket = new Socket(InetAddress.getLocalHost(), port);
+            clientSocket = new Socket(InetAddress.getByName(serverIP), port);
         } catch (IOException e) {
             e.printStackTrace();
         }
