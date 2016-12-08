@@ -25,8 +25,8 @@ public class WorkerRunnable implements Runnable {
     public void run() {
         try {
             InputStream in = clientSocket.getInputStream();
-            ObjectInput s = new ObjectInputStream(in);
-            File file = (File) s.readObject();
+//            ObjectInput s = new ObjectInputStream(in);
+            File file = new File("C:\\prueba.txt");
             try {
                 FileOutputStream out = new FileOutputStream("C:\\Computacion Distribuida\\" + file.getName());
                 byte[] bytes = new byte[64 * 1024];
@@ -36,15 +36,15 @@ public class WorkerRunnable implements Runnable {
                     out.write(bytes, 0, count);
                 }
                 out.close();
-                in.close();
                 ((IFilesManager) frame).updateFileAdded(file);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            finally{
+                in.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(WorkerRunnable.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 }

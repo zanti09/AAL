@@ -48,16 +48,19 @@ public class ClientPeer extends Thread {
     }
 
     public void uploadFile(File file) throws FileNotFoundException, IOException {
-        byte[] bytes = new byte[64 * 1024];
-        InputStream in = new FileInputStream(file);
-        OutputStream out = clientSocket.getOutputStream();
+        try {
+            byte[] bytes = new byte[64 * 1024];
+            InputStream in = new FileInputStream(file);
+            OutputStream out = clientSocket.getOutputStream();
 
-        int count;
-        while ((count = in.read(bytes)) > 0) {
-            out.write(bytes, 0, count);
+            int count;
+            while ((count = in.read(bytes)) > 0) {
+                out.write(bytes, 0, count);
+            }
+            in.close();
+        } finally {
+            out.close();
         }
-        out.close();
-        in.close();
     }
 
 }
