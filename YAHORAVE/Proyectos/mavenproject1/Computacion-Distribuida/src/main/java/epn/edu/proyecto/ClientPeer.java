@@ -10,8 +10,10 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
@@ -46,10 +48,14 @@ public class ClientPeer extends Thread {
     }
 
     public void uploadFile(File file) throws FileNotFoundException, IOException {
-        OutputStream o = clientSocket.getOutputStream();
-        ObjectOutput s = new ObjectOutputStream(o);
+        byte[] bytes = new byte[64 * 1024];
+        InputStream in = new FileInputStream(file);
+        OutputStream out = clientSocket.getOutputStream();
 
-        s.writeObject(file);
+        int count;
+        while ((count = in.read(bytes)) > 0) {
+            out.write(bytes, 0, count);
+        }
         out.close();
         in.close();
     }

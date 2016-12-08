@@ -35,6 +35,8 @@ public class WorkerRunnable implements Runnable {
                 while ((count = in.read(bytes)) > 0) {
                     out.write(bytes, 0, count);
                 }
+                out.close();
+                in.close();
                 ((IFilesManager) frame).updateFileAdded(file);
             } catch (IOException e) {
                 e.printStackTrace();
