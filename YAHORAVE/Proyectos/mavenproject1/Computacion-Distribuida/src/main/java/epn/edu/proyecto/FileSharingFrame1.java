@@ -221,7 +221,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void updateFileAdded(String fileName) {
-        modelList.addElement(fileName);
+    public void updateFileAdded(File file) {
+        modelList.addElement(file.getName());
     }
 }
