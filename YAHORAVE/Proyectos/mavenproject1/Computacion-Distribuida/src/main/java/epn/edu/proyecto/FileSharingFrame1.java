@@ -27,7 +27,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     private String rutaCarpetaCompartida;
     private JFileChooser jChooser;
     DefaultListModel<String> modelList = new DefaultListModel<>();
-    private Integer puertoLocal = 8888;
+    private Integer puertoLocal = 7777;
     private List<ClientPeer> lstClientes = new ArrayList<>();
     private Integer[] puertosServicio = new Integer[]{9990, 9991, 9992, 9993, 9994, 9995, 9996, 9997, 9998, 9999};
 
