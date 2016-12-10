@@ -6,8 +6,12 @@
 package epn.edu.proyecto;
 
 import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 
@@ -26,7 +30,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     /**
      * Creates new form FileSharingFrame
      */
-    public FileSharingFrame1() {
+    public FileSharingFrame1() throws UnknownHostException {
         initComponents();
         jlsArchivos.setModel(modelList);
         lstDireccionesRed = new ArrayList<>();
@@ -37,7 +41,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
         ServerPeer server = new ServerPeer(PORT, this);
         server.start();
         for (String direccion : lstDireccionesRed) {
-            client = new ClientPeer(PORT, direccion, "actualizar");
+            client = new ClientPeer(PORT, direccion, InetAddress.getLocalHost().getHostAddress(),"actualizar");
             client.start();
         }
 
@@ -160,7 +164,11 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FileSharingFrame1().setVisible(true);
+                try {
+                    new FileSharingFrame1().setVisible(true);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -175,6 +183,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
 
     @Override
     public void updateFileAdded(String fileName) {
+        modelList.contains(fileName);
         modelList.addElement(fileName);
     }
 

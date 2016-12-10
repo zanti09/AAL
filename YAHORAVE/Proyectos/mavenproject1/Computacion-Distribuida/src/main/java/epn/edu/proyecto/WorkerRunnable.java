@@ -30,12 +30,19 @@ public class WorkerRunnable implements Runnable {
             String accion = dataIn.readUTF();
             switch (accion) {
                 case "actualizar":
-                    actualizarArchivos();
+                    String direccion=dataIn.readUTF();
+                    File directorioPrincipal = new File("C:\\Computacion Distribuida");
+                    ClientPeer client;
+                    for (File file : directorioPrincipal.listFiles()) {
+                        client = new ClientPeer(8888, direccion, file, "subir");
+                        client.start();
+                    }
                     break;
                 case "subir":
                     subirArchivo();
                     break;
             }
+            dataIn.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,16 +57,10 @@ public class WorkerRunnable implements Runnable {
 //        System.out.println("size: "+size);
 //        OutputStream out = null;
 //        byte[] bytes = new byte[64 * 1024];
-        List<String> lstDireccionesRed = new ArrayList<>();
-        lstDireccionesRed.add("192.168.43.83");
-        lstDireccionesRed.add("192.168.43.170");
-        lstDireccionesRed.add("192.168.43.188");
         ClientPeer client;
         for (File file : directorioPrincipal.listFiles()) {
-            for (String direccion : lstDireccionesRed) {
-                client = new ClientPeer(8888, direccion, file, "subir");
-                client.start();
-            }
+            client = new ClientPeer(8888, "", file, "subir");
+            client.start();
         }
 //            dataOut = new DataOutputStream(clientSocket.getOutputStream());
 //            dataOut.writeUTF(file.getName());
