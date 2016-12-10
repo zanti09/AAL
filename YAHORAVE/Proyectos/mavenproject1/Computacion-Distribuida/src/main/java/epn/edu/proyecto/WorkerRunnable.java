@@ -1,12 +1,16 @@
 package epn.edu.proyecto;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,29 +30,64 @@ public class WorkerRunnable implements Runnable {
     @Override
     public void run() {
         try {
-            DataInputStream dataIn = new DataInputStream(clientSocket.getInputStream());
-            String fileName=dataIn.readUTF();
-            
-            InputStream in = clientSocket.getInputStream();
-            try {
-                FileOutputStream out = new FileOutputStream("C:\\Computacion Distribuida\\" + fileName);
-                byte[] bytes = new byte[64 * 1024];
 
-                int count;
-                while ((count = in.read(bytes)) > 0) {
-                    out.write(bytes, 0, count);
-                    System.err.println(count);
-                }
-                out.close();
-                ((IFilesManager) frame).updateFileAdded(fileName);
-            } catch (IOException e) {
-                e.printStackTrace();
+            DataInputStream dataIn = new DataInputStream(clientSocket.getInputStream());
+            String accion = dataIn.readUTF();
+            switch (accion) {
+                case "actualizar":
+                    actualizarArchivos();
+                    break;
+                case "subir":
+                    subirArchivo();
+                    break;
             }
-            finally{
-                IOUtils.closeQuietly(in);
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
-        } 
+        }
+    }
+
+    private void actualizarArchivos() throws FileNotFoundException, IOException {
+        File directorioPrincipal = new File("C:\\Computacion Distribuida");
+        DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
+        dataOut.writeUTF(String.valueOf(directorioPrincipal.listFiles().length));
+        OutputStream out = null;
+        byte[] bytes = new byte[64 * 1024];
+        for (File file : directorioPrincipal.listFiles()) {
+            dataOut = new DataOutputStream(clientSocket.getOutputStream());
+            dataOut.writeUTF(file.getName());
+            out = clientSocket.getOutputStream();
+
+            InputStream in = new FileInputStream(file);
+
+            int count;
+            while ((count = in.read(bytes)) > 0) {
+                out.write(bytes, 0, count);
+            }
+            in.close();
+        }
+        IOUtils.closeQuietly(out);
+    }
+
+    private void subirArchivo() throws IOException {
+        DataInputStream dataIn = new DataInputStream(clientSocket.getInputStream());
+        String fileName = dataIn.readUTF();
+        InputStream in = clientSocket.getInputStream();
+        try {
+            FileOutputStream out = new FileOutputStream("C:\\Computacion Distribuida\\" + fileName);
+            byte[] bytes = new byte[64 * 1024];
+
+            int count;
+            while ((count = in.read(bytes)) > 0) {
+                out.write(bytes, 0, count);
+                System.err.println(count);
+            }
+            out.close();
+            ((IFilesManager) frame).updateFileAdded(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(in);
+        }
     }
 }

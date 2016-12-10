@@ -28,8 +28,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     private JFileChooser jChooser;
     private DefaultListModel<String> modelList = new DefaultListModel<>();
     private static final Integer PORT = 8888;
-    private List<ClientPeer> lstClientes = new ArrayList<>();
-    private List<String> lstDireccionesRed = new ArrayList<>();
+    private List<String> lstDireccionesRed;
     private ClientPeer client;
 
     /**
@@ -38,9 +37,18 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     public FileSharingFrame1() {
         initComponents();
         jlsArchivos.setModel(modelList);
-        llenarDireccionesRed();
+        lstDireccionesRed = new ArrayList<>();
+        lstDireccionesRed.add("192.168.43.83");
+        lstDireccionesRed.add("192.168.43.170");
+        lstDireccionesRed.add("192.168.43.188");
+//        llenarDireccionesRed();
         ServerPeer server = new ServerPeer(PORT, this);
         server.start();
+        for (String direccion : lstDireccionesRed) {
+            client = new ClientPeer(PORT, direccion, "actualizar");
+            client.start();
+        }
+
     }
 
     /**
@@ -53,20 +61,12 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        conectar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jlsArchivos = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         subirArchivo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        conectar.setText("Conectar");
-        conectar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                conectarActionPerformed(evt);
-            }
-        });
 
         jScrollPane1.setViewportView(jlsArchivos);
 
@@ -85,25 +85,21 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(conectar)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(subirArchivo)))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(subirArchivo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(conectar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(subirArchivo)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -114,7 +110,9 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,57 +124,17 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void conectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectarActionPerformed
-        File archivoPuertos = new File("C:\\peerPorts.txt");
-        ClientPeer cliente;
-        try (BufferedReader br = new BufferedReader(new FileReader(archivoPuertos))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                Integer puertoCliente = Integer.parseInt(line.split(":")[1]);
-                String ipServer = line.split(":")[0];
-                if (!puertoCliente.equals(PORT)) {
-//                    cliente = new ClientPeer(puertoCliente, ipServer);
-//                    cliente.start();
-//                    lstClientes.add(cliente);
-                }
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_conectarActionPerformed
-
     private void subirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirArchivoActionPerformed
         jChooser = new JFileChooser();
         jChooser.setDialogTitle("Seleccionar Carpeta");
-        boolean subidoExcitosamente = false;
         File selectdFile;
         if (jChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             selectdFile = jChooser.getSelectedFile();
             for (String direccion : lstDireccionesRed) {
-                try {
-                    if (InetAddress.getByName(direccion).isReachable(100)) {
-                        client = new ClientPeer(PORT, direccion, selectdFile);
-                        client.start();
-                    }
-                } catch (UnknownHostException ex) {
-                    Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                client = new ClientPeer(PORT, direccion, selectdFile, "subir");
+                client.start();
             }
-//            if (subidoExcitosamente) {
-//                try {
-//                    FileUtils.copyFile(selectdFiel, new File("C:\\Computacion Distribuida\\"+selectdFiel.getName()));
-//                    modelList.addElement(selectdFiel.getName());
-//                } catch (IOException ex) {
-//                    Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
         }
-
-        // TODO add your handling code here:
     }//GEN-LAST:event_subirArchivoActionPerformed
 
     /**
@@ -216,7 +174,6 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton conectar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -231,7 +188,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
 
     public void llenarDireccionesRed() {
         for (int i = 1; i < 255; i++) {
-            lstDireccionesRed.add("192.168.1." + i);
+            lstDireccionesRed.add("192.168.43." + i);
         }
     }
 }
