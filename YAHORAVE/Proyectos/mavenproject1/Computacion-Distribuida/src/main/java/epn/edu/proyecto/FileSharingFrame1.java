@@ -41,7 +41,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
         ServerPeer server = new ServerPeer(PORT, this);
         server.start();
         for (String direccion : lstDireccionesRed) {
-            client = new ClientPeer(PORT, direccion, InetAddress.getLocalHost().getHostAddress(),"actualizar");
+            client = new ClientPeer(PORT, direccion, "192.168.43.83", "actualizar");
             client.start();
         }
 
@@ -183,8 +183,9 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
 
     @Override
     public void updateFileAdded(String fileName) {
-        modelList.contains(fileName);
-        modelList.addElement(fileName);
+        if (!modelList.contains(fileName)) {
+            modelList.addElement(fileName);
+        }
     }
 
     public void llenarDireccionesRed() {

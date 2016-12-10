@@ -30,6 +30,7 @@ public class WorkerRunnable implements Runnable {
             String accion = dataIn.readUTF();
             switch (accion) {
                 case "actualizar":
+                    dataIn = new DataInputStream(clientSocket.getInputStream());
                     String direccion=dataIn.readUTF();
                     File directorioPrincipal = new File("C:\\Computacion Distribuida");
                     ClientPeer client;

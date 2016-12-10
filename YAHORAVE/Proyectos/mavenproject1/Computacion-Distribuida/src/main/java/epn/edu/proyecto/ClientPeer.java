@@ -53,6 +53,7 @@ public class ClientPeer extends Thread {
             dataOut.writeUTF(accion);
             switch (accion) {
                 case "actualizar":
+                    dataOut = new DataOutputStream(clientSocket.getOutputStream());
                     System.out.println("Actualizando....");
                     dataOut.writeUTF(localIP);
                     break;
