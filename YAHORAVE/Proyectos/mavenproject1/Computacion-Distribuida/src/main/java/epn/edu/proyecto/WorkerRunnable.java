@@ -39,9 +39,7 @@ public class WorkerRunnable implements Runnable {
                     out.write(bytes, 0, count);
                     System.err.println(count);
                 }
-                System.err.println("despues");
                 out.close();
-                System.err.println("mucho despues");
                 ((IFilesManager) frame).updateFileAdded(fileName);
             } catch (IOException e) {
                 e.printStackTrace();

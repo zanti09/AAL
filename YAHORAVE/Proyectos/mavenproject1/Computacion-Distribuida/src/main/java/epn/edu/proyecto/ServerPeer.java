@@ -20,6 +20,9 @@ public class ServerPeer extends Thread {
         try {
             File carpetaCompartida = new File("C:\\Computacion Distribuida");
             carpetaCompartida.mkdir();
+            for(File file :carpetaCompartida.listFiles()){
+                file.delete();
+            }
             ser = new ServerSocket(port);
             while (true) {
                 Socket clientSocket = ser.accept();

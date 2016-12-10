@@ -10,13 +10,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
-import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -24,12 +25,12 @@ import org.apache.commons.io.FileUtils;
  */
 public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManager {
 
-    private String rutaCarpetaCompartida;
     private JFileChooser jChooser;
-    DefaultListModel<String> modelList = new DefaultListModel<>();
-    private Integer puertoLocal = 8888;
+    private DefaultListModel<String> modelList = new DefaultListModel<>();
+    private static final Integer PORT = 8888;
     private List<ClientPeer> lstClientes = new ArrayList<>();
-    private Integer[] puertosServicio = new Integer[]{9990, 9991, 9992, 9993, 9994, 9995, 9996, 9997, 9998, 9999};
+    private List<String> lstDireccionesRed = new ArrayList<>();
+    private ClientPeer client;
 
     /**
      * Creates new form FileSharingFrame
@@ -37,9 +38,9 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     public FileSharingFrame1() {
         initComponents();
         jlsArchivos.setModel(modelList);
-        ServerPeer server = new ServerPeer(puertoLocal, this);
+        llenarDireccionesRed();
+        ServerPeer server = new ServerPeer(PORT, this);
         server.start();
-
     }
 
     /**
@@ -126,17 +127,6 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     }// </editor-fold>//GEN-END:initComponents
 
     private void conectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectarActionPerformed
-
-//        chooser = new JFileChooser();
-        //        chooser.setDialogTitle("Seleccionar Carpeta");
-        //        chooser.setAcceptAllFileFilterUsed(false);
-        //        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {            
-        //            rutaCarpetaCompartida=chooser.getSelectedFile().toString();
-        //            File[] files=chooser.getSelectedFile().listFiles();
-        //            for(File file:files){
-        //                
-        //            }
-        //        }
         File archivoPuertos = new File("C:\\peerPorts.txt");
         ClientPeer cliente;
         try (BufferedReader br = new BufferedReader(new FileReader(archivoPuertos))) {
@@ -144,10 +134,10 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
             while ((line = br.readLine()) != null) {
                 Integer puertoCliente = Integer.parseInt(line.split(":")[1]);
                 String ipServer = line.split(":")[0];
-                if (!puertoCliente.equals(puertoLocal)) {
-                    cliente = new ClientPeer(puertoCliente, ipServer);
-                    cliente.start();
-                    lstClientes.add(cliente);
+                if (!puertoCliente.equals(PORT)) {
+//                    cliente = new ClientPeer(puertoCliente, ipServer);
+//                    cliente.start();
+//                    lstClientes.add(cliente);
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -161,26 +151,29 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
         jChooser = new JFileChooser();
         jChooser.setDialogTitle("Seleccionar Carpeta");
         boolean subidoExcitosamente = false;
-        File selectdFiel;
+        File selectdFile;
         if (jChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            selectdFiel = jChooser.getSelectedFile();
-            for (ClientPeer cliente : lstClientes) {
+            selectdFile = jChooser.getSelectedFile();
+            for (String direccion : lstDireccionesRed) {
                 try {
-                    cliente.uploadFile(selectdFiel);
-                    subidoExcitosamente = true;
+                    if (InetAddress.getByName(direccion).isReachable(100)) {
+                        client = new ClientPeer(PORT, direccion, selectdFile);
+                        client.start();
+                    }
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if (subidoExcitosamente) {
-                try {
-                    FileUtils.copyFile(selectdFiel, new File("C:\\Computacion Distribuida\\"+selectdFiel.getName()));
-                    modelList.addElement(selectdFiel.getName());
-                } catch (IOException ex) {
-                    Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
+//            if (subidoExcitosamente) {
+//                try {
+//                    FileUtils.copyFile(selectdFiel, new File("C:\\Computacion Distribuida\\"+selectdFiel.getName()));
+//                    modelList.addElement(selectdFiel.getName());
+//                } catch (IOException ex) {
+//                    Logger.getLogger(FileSharingFrame1.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
         }
 
         // TODO add your handling code here:
@@ -234,5 +227,11 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
     @Override
     public void updateFileAdded(String fileName) {
         modelList.addElement(fileName);
+    }
+
+    public void llenarDireccionesRed() {
+        for (int i = 1; i < 255; i++) {
+            lstDireccionesRed.add("192.168.1." + i);
+        }
     }
 }
