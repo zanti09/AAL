@@ -1,19 +1,14 @@
 package epn.edu.proyecto;
 
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.OutputStream;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import org.apache.commons.io.IOUtils;
 
@@ -49,24 +44,38 @@ public class WorkerRunnable implements Runnable {
 
     private void actualizarArchivos() throws FileNotFoundException, IOException {
         File directorioPrincipal = new File("C:\\Computacion Distribuida");
-        DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
-        dataOut.writeUTF(String.valueOf(directorioPrincipal.listFiles().length));
-        OutputStream out = null;
-        byte[] bytes = new byte[64 * 1024];
+//        DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
+//        String size=String.valueOf(directorioPrincipal.listFiles().length);
+//        dataOut.writeUTF(size);
+//        System.out.println("size: "+size);
+//        OutputStream out = null;
+//        byte[] bytes = new byte[64 * 1024];
+        List<String> lstDireccionesRed = new ArrayList<>();
+        lstDireccionesRed.add("192.168.43.83");
+        lstDireccionesRed.add("192.168.43.170");
+        lstDireccionesRed.add("192.168.43.188");
+        ClientPeer client;
         for (File file : directorioPrincipal.listFiles()) {
-            dataOut = new DataOutputStream(clientSocket.getOutputStream());
-            dataOut.writeUTF(file.getName());
-            out = clientSocket.getOutputStream();
-
-            InputStream in = new FileInputStream(file);
-
-            int count;
-            while ((count = in.read(bytes)) > 0) {
-                out.write(bytes, 0, count);
+            for (String direccion : lstDireccionesRed) {
+                client = new ClientPeer(8888, direccion, file, "subir");
+                client.start();
             }
-            in.close();
         }
-        IOUtils.closeQuietly(out);
+//            dataOut = new DataOutputStream(clientSocket.getOutputStream());
+//            dataOut.writeUTF(file.getName());
+//            System.out.println("file.getName(): "+file.getName());
+//            out = clientSocket.getOutputStream();
+//
+//            InputStream in = new FileInputStream(file);
+//
+//            int count;
+//            while ((count = in.read(bytes)) > 0) {
+//                out.write(bytes, 0, count);
+//            }
+//            out.flush();
+//            in.close();
+
+//        IOUtils.closeQuietly(out);
     }
 
     private void subirArchivo() throws IOException {
