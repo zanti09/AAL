@@ -14,5 +14,6 @@ import java.io.File;
 public interface IFilesManager {
     
     public void updateFileAdded(String fileName);
+    public void updateFileDeleted(String fileName);
     
 }

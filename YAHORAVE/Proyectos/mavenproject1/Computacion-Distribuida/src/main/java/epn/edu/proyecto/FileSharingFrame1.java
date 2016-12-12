@@ -79,7 +79,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Eliminar Archivo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -123,7 +123,7 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 141, Short.MAX_VALUE))
+                .addGap(0, 125, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,8 +154,10 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
                     for (String fileName : jlsArchivos.getSelectedValuesList()) {
                         client = new ClientPeer(fileName,PORT, direccion, "eliminar");
                         client.start();
+                        
                     }
-        }                 
+        }               
+     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -213,6 +215,15 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
             modelList.addElement(fileName);
         }
     }
+
+    @Override
+    public void updateFileDeleted(String fileName) {
+        if (!modelList.contains(fileName)) {
+            modelList.removeElement(fileName);
+        }
+    }
+    
+    
 
     public void llenarDireccionesRed() {
         for (int i = 1; i < 255; i++) {

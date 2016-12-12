@@ -69,6 +69,7 @@ public class ClientPeer extends Thread {
                     break;
                 case "eliminar":
                     eliminarArchivos();
+                    break;
             }
             dataOut.close();
         } catch (IOException e) {
