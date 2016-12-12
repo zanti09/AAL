@@ -42,6 +42,8 @@ public class WorkerRunnable implements Runnable {
                 case "subir":
                     subirArchivo();
                     break;
+                case "eliminar":
+                    eliminarArchivos();
             }
             dataIn.close();
 
@@ -100,5 +102,10 @@ public class WorkerRunnable implements Runnable {
         } finally {
             IOUtils.closeQuietly(in);
         }
+    }
+    private void eliminarArchivos() throws IOException{
+          DataInputStream dataIn = new DataInputStream(clientSocket.getInputStream());
+        String fileName = dataIn.readUTF();
+        new File("C:\\Computacion Distribuida\\" + fileName).delete();    
     }
 }

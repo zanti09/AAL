@@ -30,6 +30,7 @@ public class ClientPeer extends Thread {
     private File file;
     private String accion;
     private String localIP;
+    private String fileName;
 
     public ClientPeer(int port, String serverIP, File file, String accion) {
         this.port = port;
@@ -43,6 +44,12 @@ public class ClientPeer extends Thread {
         this.serverIP = serverIP;
         this.accion = accion;
         this.localIP=localIP;
+    }
+     public ClientPeer(String fileName, int port, String serverIP , String accion) {
+        this.port = port;
+        this.serverIP = serverIP;
+        this.fileName = fileName;
+        this.accion = accion;
     }
 
     @Override
@@ -60,6 +67,8 @@ public class ClientPeer extends Thread {
                 case "subir":
                     subirArchivo();
                     break;
+                case "eliminar":
+                    eliminarArchivos();
             }
             dataOut.close();
         } catch (IOException e) {
@@ -83,5 +92,11 @@ public class ClientPeer extends Thread {
         } finally {
             IOUtils.closeQuietly(out);
         }
+    }
+     private void eliminarArchivos() throws IOException{
+        DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
+        dataOut.writeUTF(fileName);
+        
+        
     }
 }
