@@ -44,7 +44,10 @@ public class FileSharingFrame1 extends javax.swing.JFrame implements IFilesManag
             client = new ClientPeer(PORT, direccion, "192.168.43.83", "actualizar");
             client.start();
         }
-
+        
+        for(File file:new File("C:\\Computacion Distribuida").listFiles()){
+            updateFileAdded(file.getName());
+        }
     }
 
     /**
